@@ -291,3 +291,4 @@ defaults:
       share: true
       related: true
       show_date: true
+date-format: "%Y-%m-%d"
