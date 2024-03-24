@@ -16,7 +16,7 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "midoBanDev"
+title                    : "기록하는습관"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : # "MidoBanDev"
