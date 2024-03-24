@@ -106,7 +106,7 @@ analytics:
 author:
   name             : "MidoBanDev"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : # "I am an **amazing** person."
+  bio              : "매일 기록하는 습관이 필요합니다."
   location         : # "Somewhere"
   email            : 
   links:
