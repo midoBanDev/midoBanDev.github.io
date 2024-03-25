@@ -103,17 +103,12 @@ analytics:
 
 # Sidebar
 sidebar:
-  enabled: true
-  title: "사이드바 제목"
-  nav:
-    - title: "홈"
-      url: "/"
-    - title: "블로그"
-      url: "/blog/"
-    - title: "프로젝트"
-      url: "/projects/"
-
-
+  - title: "Title"
+    image: http://placehold.it/350x250
+    image_alt: "image"
+    text: "Some text here."
+  - title: "Another Title"
+    text: "More text here."
 
 # Site Author
 author:
