@@ -1,6 +1,7 @@
 ---
-layout: single
+layout: categories
 title:  "이펙티브 자바를 시작합니다"
+permalink: "/categories/"
 ---
 
 
