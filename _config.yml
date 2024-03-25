@@ -294,4 +294,6 @@ defaults:
       share: true
       related: true
       show_date: true
+      sidebar:
+        nav: "docs"
 date-format: "%Y-%m-%d"
