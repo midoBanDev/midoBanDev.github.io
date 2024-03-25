@@ -101,6 +101,19 @@ analytics:
     tracking_id          :
     anonymize_ip         : # true, false (default)
 
+# Sidebar
+sidebar:
+  enabled: true
+  title: "사이드바 제목"
+  nav:
+    - title: "홈"
+      url: "/"
+    - title: "블로그"
+      url: "/blog/"
+    - title: "프로젝트"
+      url: "/projects/"
+
+
 
 # Site Author
 author:
