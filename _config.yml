@@ -101,10 +101,6 @@ analytics:
     tracking_id          :
     anonymize_ip         : # true, false (default)
 
-# Sidebar
-sidebar:
-  nav: "docs"
-
 # Site Author
 author:
   name             : "MidoBanDev"
