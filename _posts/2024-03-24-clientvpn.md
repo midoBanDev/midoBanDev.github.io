@@ -10,7 +10,8 @@ toc: true
 toc_sticky: true
 ---
 
-
+공지사항 입니다.
+{: .notice}
 
 ## AWS Client VPN 설정
 - 가이드 문서 링크 : [AWS Client VPN 설정 공식 가이드 문서](https://docs.aws.amazon.com/ko_kr/vpn/latest/clientvpn-admin/cvpn-getting-started.html#cvpn-getting-started-certs)
