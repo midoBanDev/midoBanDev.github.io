@@ -1,6 +1,13 @@
 ---
 layout: single
 title:  "AWS Client VPN 설정"
+categories:
+  - Blog
+tags:
+  - [Blog, jekyll, Github, Git]
+
+toc: true
+toc_sticky: true
 ---
 
 
