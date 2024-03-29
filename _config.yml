@@ -290,4 +290,5 @@ defaults:
       share: true
       related: true
       show_date: true
+      sidebar_main: true
 date-format: "%Y-%m-%d"
