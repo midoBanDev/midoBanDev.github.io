@@ -19,14 +19,14 @@
             <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
             {% for category in site.categories %}
                 {% if category[0] == "Java" %}
-                    <li><a href="/categories/cpp" class="">java ({{category[1].size}})</a></li>
+                    <li><a href="/categories/java" class="">java ({{category[1].size}})</a></li>
                 {% endif %}
             {% endfor %}
         </ul>
         <ul>
             {% for category in site.categories %}
                 {% if category[0] == "Algorithm" %}
-                    <li><a href="/categories/stl" class="">Java 알고리즘 ({{category[1].size}})</a></li>
+                    <li><a href="/categories/algorithm" class="">Java 알고리즘 ({{category[1].size}})</a></li>
                 {% endif %}
             {% endfor %}
         </ul>
@@ -35,14 +35,14 @@
         <ul>
             {% for category in site.categories %}
                 {% if category[0] == "spring" %}
-                    <li><a href="/categories/algorithm" class="">Spring 프레임워크 ({{category[1].size}})</a></li>
+                    <li><a href="/categories/spring" class="">Spring 프레임워크 ({{category[1].size}})</a></li>
                 {% endif %}
             {% endfor %}
         </ul>
         <ul>
             {% for category in site.categories %}
                 {% if category[0] == "springboot" %}
-                    <li><a href="/categories/programmers" class="">SpringBoot ({{category[1].size}})</a></li>
+                    <li><a href="/categories/springboot" class="">SpringBoot ({{category[1].size}})</a></li>
                 {% endif %}
             {% endfor %}
         </ul>
