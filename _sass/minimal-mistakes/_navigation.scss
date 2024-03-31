@@ -440,9 +440,24 @@
 .nav__list .nav__items {
   margin: 0;
   font-size: 1.25rem;
+  font-family: $sans-serif;
+
+  img { // 방문자수 이미지 크기 맞추느라 추가했던 것
+    width: auto; height: auto;
+    max-width: 140px;
+    max-height: 38px;
+    margin-bottom: 1em;
+  }
 
   a {
     color: inherit;
+    font-size: $type-size-3;
+    //font-family: $cute;
+    color: mix(#fff,$primary-color,80%);
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   .active {
@@ -493,7 +508,7 @@
   margin: 0.5rem 0;
   padding: 0.25rem 0;
   font-family: $sans-serif-narrow;
-  font-size: $type-size-6;
+  font-size: $type-size-3;
   font-weight: bold;
   text-transform: uppercase;
   border-bottom: 1px solid $border-color;

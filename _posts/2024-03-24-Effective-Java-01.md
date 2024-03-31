@@ -1,5 +1,13 @@
 ---
+layout: single
 title:  "이펙티브 자바를 시작합니다"
+categories:
+  - Java
+tags:
+  - [Blog, jekyll, Github, Git]
+
+toc: true
+toc_sticky: true
 ---
 
 
