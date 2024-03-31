@@ -14,15 +14,17 @@
     @if $base-unit == 'px' or $base-unit == '%' or $base-unit == 'em' or $base-unit == 'pt' {
       @return base-conversion($value) / base-conversion(breakpoint-get('base font size')) * 1em;
     }
-    @else {
-      @warn '#{breakpoint-get(\'base font size\')} is not set in valid units for font size!';
+    @else{
+      @warn "`#{breakpoint-get('base font size')}` is not set in valid units for font size!";
       @return false;
     }
+      
   }
   @else {
     @return base-conversion($value);
   }
 }
+
 
 @function base-conversion($value) {
   $unit: unit($value);
