@@ -338,7 +338,8 @@ body {
   }
 }
 
-.page__taxonomy-item {
+/*카테고리 스타일*/
+.page__taxonomy-item-category {
   display: inline-block;
   margin-right: 5px;
   margin-bottom: 8px;
@@ -346,6 +347,24 @@ body {
   text-decoration: none;
   border: 1px solid mix(#000, $border-color, 25%);
   border-radius: $border-radius;
+  background-color: #4D5357;
+
+  &:hover {
+    text-decoration: none;
+    color: $link-color-hover;
+  }
+}
+
+/*태그 스타일*/
+.page__taxonomy-item-tag {
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: 8px;
+  padding: 5px 10px;
+  text-decoration: none;
+  border: 1px solid mix(#000, $border-color, 25%);
+  border-radius: $border-radius;
+  background-color: mix(#fff, #4D5357, 18%);
 
   &:hover {
     text-decoration: none;
