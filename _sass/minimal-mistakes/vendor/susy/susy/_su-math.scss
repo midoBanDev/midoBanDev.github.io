@@ -60,8 +60,6 @@
 /// @return {length} -
 ///   Relative or static length of a span on the grid
 
-@use "sass:math";
-
 
 @function su-span(
   $span,
