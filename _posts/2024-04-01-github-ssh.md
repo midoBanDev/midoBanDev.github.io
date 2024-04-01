@@ -2,7 +2,7 @@
 layout: single
 title:  "Github SSH 설정"
 categories:
-  - Git
+  - Github
 tags:
   - [Github, Ssh]
 
