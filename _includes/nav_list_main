@@ -25,8 +25,8 @@
         </ul>
         <ul>
             {% for category in site.categories %}
-                {% if category[0] == "Algorithm" %}
-                    <li><a href="/categories/algorithm" class="">Java 알고리즘 ({{category[1].size}})</a></li>
+                {% if category[0] == "effective" %}
+                    <li><a href="/categories/effective" class="">Effective Java ({{category[1].size}})</a></li>
                 {% endif %}
             {% endfor %}
         </ul>
