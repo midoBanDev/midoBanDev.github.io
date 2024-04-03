@@ -2,7 +2,7 @@
 layout: single
 title:  "AWS Client VPN 설정"
 categories:
-  - aws
+  - Aws
 tags:
   - [Blog, jekyll, Github, Git]
 
@@ -10,13 +10,11 @@ toc: true
 toc_sticky: true
 ---
 
-공지사항 입니다.
-{: .notice}
 
 ## AWS Client VPN 설정
 - 가이드 문서 링크 : [AWS Client VPN 설정 공식 가이드 문서](https://docs.aws.amazon.com/ko_kr/vpn/latest/clientvpn-admin/cvpn-getting-started.html#cvpn-getting-started-certs)
 
-<br>
+<br><br>
 
 ## VPC 및 Client VPN 엔드포인트의 구성
 ![image](https://github.com/wglee-github/develop-issue/assets/102303114/cf1d5789-8556-4c34-aa22-bc524ddc3f11)
@@ -28,7 +26,7 @@ toc_sticky: true
 따라서 공식 문서에 대한 참고용으로 활용하기 바란다. 
 설치 및 설정은 과정은 모두 가이드 문서를 참고해야 한다.
 
-<br>
+<br><br>
 
 ## 1단계: 서버와 클라이언트 인증서 및 키 생성
 - 서버와 클라이언트에서 사용할 인증서 및 키를 생성하는 단계이다.  
@@ -53,9 +51,54 @@ ACM으로 가져오는 자세한 단계는 [상호 인증] 단원을 참조하�
 
 **아래 번호는 가이드 문서 기준으로 작성되었다.**
 
-→ 3번~8번 : [상세보기](https://github.com/wglee-github/develop-issue/wiki/AWS-Client-VPN-%EC%83%81%ED%98%B8%EC%9D%B8%EC%A6%9D)
+→ 3번~8번 : [인증서 및 키 생성](https://github.com/wglee-github/develop-issue/wiki/AWS-Client-VPN-%EC%83%81%ED%98%B8%EC%9D%B8%EC%A6%9D)
 → 9번 : 마지막 업르드를(10번)을 위한 준비과정이다. 아무 폴더나 생성해서 가이드 문서대로 인증서와 키 파일을 옮겨주자.   
-→ 10번 : 명령어 실행 전 사전준비가 필요하다.
-1. aws 명령어를 사용하기 위해서는 "AWS CLI"를 설치해야 한다. [AWS CLI 설치 가이드](https://github.com/wglee-github/develop-issue/wiki/AWS-CLI-%EC%84%A4%EC%B9%98)  
+→ 10번 : 명령어 실행 전 사전 준비가 필요하다.
+1. aws 명령어를 사용하기 위해서는 `AWS CLI`를 설치해야 한다. [AWS CLI 설치 가이드](https://github.com/wglee-github/develop-issue/wiki/AWS-CLI-%EC%84%A4%EC%B9%98)  
 
-2. 설치가 완료 되었으면 aws config 설정을 해줘야 한다. AWS 계정과 연동을 위한 설정이다. [AWS config](https://github.com/wglee-github/develop-issue/wiki/AWS-config-%EC%84%A4%EC%A0%95)
+2. 설치가 완료 되었으면 `aws configure` 설정을 해줘야 한다.  
+   
+   a. 우선 AWS 계정과 연동을 위한 `access key`를 발급 받자. [AWS configure access key 발급 가이드](https://github.com/wglee-github/develop-issue/wiki/AWS-config-access-key)
+   
+   b. access key 발급 후 `aws configure` 설정을 해보자. [AWS configure 설정 가이드](https://github.com/wglee-github/develop-issue/wiki/aws-configure)
+
+
+3. 서버 인증서와 클라이언트 인증서를 업로드 해주자. [인증서 및 키 업로드](https://github.com/wglee-github/develop-issue/wiki/ACM-Upload) 
+
+<br><br>
+
+## 2단계: 클라이언트 VPN 엔드포인트 생성
+- 엔드포인트 생성 전 알아야할 정보 : `클라이언트 IPv4 CIDR`, `DNS 서버 IP`, `VPC`  
+  - [클라이언트 VPN 엔드포인트 생성 가이드](https://github.com/wglee-github/develop-issue/wiki/AWS-Endpoint)
+
+<br><br>
+
+## 3단계: 대상 네트워크 연결
+- [대상 네트워크 연결 가이드](https://github.com/wglee-github/develop-issue/wiki/Target-Network) 
+
+<br><br>
+
+## 4단계: VPC에 대한 권한 부여 규칙 추가
+- [권한 부여 규칙 가이드](https://github.com/wglee-github/develop-issue/wiki/VPC-Authorization-Rules)
+
+<br><br>
+
+## 5,6 단계: SKIP
+
+<br><br>
+
+## 7단계: Client VPN 엔드포인트 구성 파일 다운로드
+- [엔드포인트 구성 파일 다운로드 가이드](https://github.com/wglee-github/develop-issue/wiki/Client-Config-File-Download)
+
+<br><br>
+
+## 8단계: Client VPN 엔드포인트에 연결
+- [Openvpn 기반 클라이언트 애플리케이션 설치 가이드](https://github.com/wglee-github/develop-issue/wiki/Openvpn-install)
+
+<br><br>
+
+## Client VPN 엔드포인트 삭제
+
+1. 대상 네트워크 연결 해제
+2. 권한 부여 규칙 제거
+3. 1,2번이 삭제 된 후 Client VPN 엔드포인트 삭제가 가능하다.
