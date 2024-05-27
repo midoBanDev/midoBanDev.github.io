@@ -14,16 +14,14 @@ toc_sticky: true
 ## IntelliJ 단축키
 
 - 행 삭제
-  - 
-   
+  -
   ```
   Ctrl + X
   ```
 <br>
 
 - 변수 자동 생성 : Introduce Variable
-  - 
-   
+  -
   ```
   변수 생성할 코드 제일 뒤에 커서 두고 → Ctrl + Shift + Alt + V → Introduce Variable 선택
 
@@ -34,7 +32,7 @@ toc_sticky: true
 <br>
 
 - Refactor Option 열기
-  - 
+  -
   `변수합치기`, `변수이름일괄변경`, `선택한 코드 메서드로 뽑아내기` 등 엄청 다양한 기능 제공
    
   ```
@@ -43,8 +41,7 @@ toc_sticky: true
 <br>
 
 - 변수 합치기 : Inline Variable 
-  - 
-   
+  -
   ```
   합칠 변수에 커서 두고 → Ctrl + Shift + Alt + T → Inline Variable 선택
 
@@ -66,8 +63,7 @@ toc_sticky: true
 <br>
 
 - 참조된 모든 변수 이름 일괄 변경
-  - 
-   
+  -
   ```
   변경할 변수에 커서 두고 → Ctrl + Shift + Alt + T → Rename 선택
 
@@ -91,8 +87,7 @@ toc_sticky: true
 <br>
 
 - main 메서드 실행
-  - 
-  
+  -
   ```
   메서드 옆 ▷ 버튼 클릭 후 Run
 
@@ -103,8 +98,7 @@ toc_sticky: true
 <br>  
 
 - 메서드의 매개변수 타입 확인
-  - 
-   
+  -
   ```
   메서드 매개변수 입력 괄호에 커서 두고 → Ctrl + P
   ```  
@@ -114,7 +108,7 @@ toc_sticky: true
 <br>  
 
 - Generate 옵션 창
-  - 
+  -
   `생성자`, `setter`, `getter`, `toString` 등 생성할 수 있고, 그외도 다양한 기능 제공( 아래 이미지 참고 )
    
   ```
@@ -126,7 +120,7 @@ toc_sticky: true
 <br>  
 
 - Override/Implement 할 메서드 선택 창 열기 
-  - 
+  -
   `extends` 또는 `implemnet` 한 객체에 있는 override 가능한 메서드를 보여준다.
    
   ```
@@ -136,7 +130,7 @@ toc_sticky: true
 <br> 
 
 - 메서드 위치 바꾸기
-  - 
+  -
   메서드의 시작 행 또는 마지막 행에 커서를 두고 단축키를 실행하면 된다.
    
   ```

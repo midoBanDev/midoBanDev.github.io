@@ -17,7 +17,7 @@ toc_sticky: true
   
 <br>  
 
-<img src="https://github.com/midoBanDev/midoBanDev.github.io/assets/164727588/3c7f9746-c7f6-4162-af94-a860970da7c3" width="50%" height="50%"/>
+<img src="https://github.com/midoBanDev/midoBanDev.github.io/assets/164727588/3c7f9746-c7f6-4162-af94-a860970da7c3" width="80%" height="80%"/>
 
 <br><br>
 
@@ -31,19 +31,19 @@ toc_sticky: true
 
 - 왼쪽 메뉴 우측 상단에 `세점` 클릭.  
   
-<img src="https://github.com/midoBanDev/midoBanDev.github.io/assets/164727588/4f79a1f4-3302-43fe-bb88-9d50a69df43d" width="50%" height="50%"/>
+<img src="https://github.com/midoBanDev/midoBanDev.github.io/assets/164727588/4f79a1f4-3302-43fe-bb88-9d50a69df43d" width="80%" height="80%"/>
 
 <br>
 
 - Tree Appearance > Compact Middle packages 체크를 풀어준다. 
   
-<img src="https://github.com/midoBanDev/midoBanDev.github.io/assets/164727588/74c37191-b8b9-406b-acbe-ba47ac792bec" width="50%" height="50%"/>
+<img src="https://github.com/midoBanDev/midoBanDev.github.io/assets/164727588/74c37191-b8b9-406b-acbe-ba47ac792bec" width="80%" height="80%"/>
 
 <br>
 
 - 아래와 같이 중간 패키지도 Tree 구조로 보임. 
   
-<img src="https://github.com/midoBanDev/midoBanDev.github.io/assets/164727588/6c244bbf-bae7-4b63-8d23-14d616665257" width="50%" height="50%"/>
+<img src="https://github.com/midoBanDev/midoBanDev.github.io/assets/164727588/6c244bbf-bae7-4b63-8d23-14d616665257" width="80%" height="80%"/>
 
 
 
