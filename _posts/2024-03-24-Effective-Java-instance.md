@@ -16,7 +16,7 @@ toc_sticky: true
 >■ 여기서 class는 객체를 생성하기 위한 설계도 라고 이해하면 쉽다.  
 >■ class를 메모리에 할당하면 객체, 즉 인스턴스가 생성된다.  
 >■ 따라서 클래스의 `인스턴스를 생성하다` 또는 `인스턴스 얻다` 라는 말은 class를 메모리에 할당 한다는 의미이다.  
->■ 인스턴스와 개체를 같은 의미도 해석하는 것이 맞다.
+>■ 인스턴스와 객체를 같은 의미도 해석하는 것이 맞다.
 
 ```java
 /**
@@ -56,16 +56,19 @@ Example example = new Example();
 <br>
 
 #### 2. 리플렉션을 통한 인스턴스 생성  
-
 ```java
 Class<Example> clazz = Example.class;
 
-// Class.newInstance() 사용
+// Class.newInstance() 사용 : Java 9 버전 이후에는 deprecated 되었다. 
 Example example = clazz.newInstance();  
 
-// constructor.newInstance() 사용
+// constructor.newInstance() 사용 : constructor는 public 접근 수준의 생성자만 가져온다.
 Constructor<Example> constructor = clazz.getConstructor();
 Example example = constructor.newInstance();
+
+// DeclaredConstructor.newInstance() 사용 : DeclaredConstructor는 모든 접근 수준의 생성자를 가져올 수 있다.
+Constructor<ExampleClass> constructor = clazz.getDeclaredConstructor();
+ExampleClass instance = constructor.newInstance();
 
 ```
 
