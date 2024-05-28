@@ -13,10 +13,31 @@ toc_sticky: true
 
 ## IntelliJ 단축키
 
-- 행 삭제
+- 설정 창
   -
   ```
-  Ctrl + X
+  Ctrl + Alt + S
+  ```
+<br>
+
+- 단축키 변경
+  -
+  ```
+  설정창 오픈(Ctrl + Alt + S) → keymap → Editor Actions 목록에서 찾은 후 변경 가능.
+  ```
+<br>
+
+- 행 삭제 : 설정에서 단축키 변경 했음.
+  -
+  ```
+  Ctrl + D
+  ```
+<br>
+
+- 코드 라인 복사 : 설정에서 단축키 변경 했음.
+  -
+  ```
+  Ctrl + Alt + Down
   ```
 <br>
 
@@ -43,7 +64,7 @@ toc_sticky: true
 - 변수 합치기 : Inline Variable 
   -
   ```
-  합칠 변수에 커서 두고 → Ctrl + Shift + Alt + T → Inline Variable 선택
+  합칠 변수에 커서 두고 → Refactor Option 창 오픈(Ctrl + Shift + Alt + T) → Inline Variable 선택
 
   또는 
 
