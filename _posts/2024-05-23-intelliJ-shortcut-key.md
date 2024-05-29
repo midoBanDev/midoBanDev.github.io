@@ -109,6 +109,7 @@ toc_sticky: true
 
 - main 메서드 실행
   -
+  main 메서드가 있는 java 파일에서 실행해야 한다.
   ```
   메서드 옆 ▷ 버튼 클릭 후 Run
 
@@ -116,6 +117,18 @@ toc_sticky: true
 
   Ctrl + Shift + F10
   ```
+
+- main 메서드 재 실행
+  -
+  ```
+  Ctrl + F5
+
+  또는 
+
+  하단 메뉴 Run 밑에 새로고침 아이콘 클릭
+  ```
+  <img src="https://github.com/midoBanDev/midoBanDev.github.io/assets/164727588/4e9fcdaa-1437-41a9-94cd-184738ff7191" width="5%" height="5%"/>
+
 <br>  
 
 - 메서드의 매개변수 타입 확인
@@ -124,7 +137,7 @@ toc_sticky: true
   메서드 매개변수 입력 괄호에 커서 두고 → Ctrl + P
   ```  
   
-    <img src="https://github.com/midoBanDev/midoBanDev.github.io/assets/164727588/16490c8f-3ea6-4a2c-98e8-e8b1dd75225b" width="50%" height="50%"/>
+  <img src="https://github.com/midoBanDev/midoBanDev.github.io/assets/164727588/16490c8f-3ea6-4a2c-98e8-e8b1dd75225b" width="50%" height="50%"/>
 
 <br>  
 
@@ -136,7 +149,7 @@ toc_sticky: true
   Alt + Ins(Insert key)
   ```  
   
-    <img src="https://github.com/midoBanDev/midoBanDev.github.io/assets/164727588/6df72526-9447-46d6-b747-d46767b88067" width="18%" height="30%"/>
+  <img src="https://github.com/midoBanDev/midoBanDev.github.io/assets/164727588/6df72526-9447-46d6-b747-d46767b88067" width="18%" height="30%"/>
 
 <br>  
 
@@ -160,6 +173,15 @@ toc_sticky: true
 
 <br> 
 
+- 부모 객체 생성자 생성
+  -
+  ```
+  Alt + Enter → Create constructor matching super 선택  
+  ```  
+  <img src="https://github.com/midoBanDev/midoBanDev.github.io/assets/164727588/8b816be1-0508-47a1-911b-143536d30fc6" width="80%" height="80%"/>"
+
+<br> 
+
 <br><br>
 
 
@@ -167,7 +189,7 @@ toc_sticky: true
 
 
 
-<img src="" width="50%" height="50%"/>
+
 <img src="" width="50%" height="50%"/>
 <img src="" width="50%" height="50%"/>
 <img src="" width="50%" height="50%"/>
