@@ -64,11 +64,15 @@ toc_sticky: true
 - 변수 합치기 : Inline Variable 
   -
   ```
-  합칠 변수에 커서 두고 → Refactor Option 창 오픈(Ctrl + Shift + Alt + T) → Inline Variable 선택
-
-  또는 
+  (Alt + Enter) → Inline Variable 선택
+  
+  또는
 
   Ctrl + Alt + N
+  
+  또는 
+
+  합칠 변수에 커서 두고 → Refactor Option 창 오픈(Ctrl + Shift + Alt + T) → Inline Variable 선택
   ```
   ```java
   ObjectBox integerBox = new ObjectBox();
@@ -83,7 +87,7 @@ toc_sticky: true
   ```
 <br>
 
-- 참조된 모든 변수 이름 일괄 변경
+- 변수 이름 일괄 변경
   -
   ```
   변경할 변수에 커서 두고 → Ctrl + Shift + Alt + T → Rename 선택
@@ -94,7 +98,7 @@ toc_sticky: true
   ```
 <br>
 
-- 선택한 코드 메서드로 분리하기
+- 메서드 분리
   -
   원하는 코드 구간을 `드래그`로 선택한 후 메서드로 분리할 수 있다. 
    
@@ -163,9 +167,15 @@ toc_sticky: true
 
 <br> 
 
-- 메서드 위치 바꾸기
+- 메서드, 코드라인 등 위치 이동
   -
-  메서드의 시작 행 또는 마지막 행에 커서를 두고 단축키를 실행하면 된다.
+  메서드의 시작 행 또는 마지막 행에 커서를 두고 단축키를 실행하면 된다.   
+  코드 라인도 위치 변경 가능하다.    
+  
+  기준  
+  : {}로 감싸져 있는 코드의 첫 라인과 끝 라인.   
+  : ;로 끝난 코드 라인
+
    
   ```
   Ctrl + Shift + 방향키 (↓ 또는 ↑)
@@ -179,6 +189,18 @@ toc_sticky: true
   Alt + Enter → Create constructor matching super 선택  
   ```  
   <img src="https://github.com/midoBanDev/midoBanDev.github.io/assets/164727588/8b816be1-0508-47a1-911b-143536d30fc6" width="80%" height="80%"/>"
+
+<br> 
+
+- 정의된 클래스 또는 메서드로 이동
+  -
+  ```
+  Ctrl + 마우스 좌클릭
+
+  또는
+
+  F5
+  ```  
 
 <br> 
 
