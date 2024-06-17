@@ -2,7 +2,7 @@
 layout: single
 title:  "JDBC 설정 정보 암호화 - Jasypt 사용"
 categories:
-  - JAVA
+  - Java
 tags:
   - [JDBC, Jasypt, Encryption]
 

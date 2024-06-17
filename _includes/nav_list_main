@@ -34,15 +34,22 @@
         <span class="nav__sub-title">SPRING</span>
         <ul>
             {% for category in site.categories %}
-                {% if category[0] == "spring" %}
-                    <li><a href="/categories/spring" class="">Spring 프레임워크 ({{category[1].size}})</a></li>
+                {% if category[0] == "SpringFramework" %}
+                    <li><a href="/categories/springframework" class="">Spring 프레임워크 ({{category[1].size}})</a></li>
                 {% endif %}
             {% endfor %}
         </ul>
         <ul>
             {% for category in site.categories %}
-                {% if category[0] == "springboot" %}
+                {% if category[0] == "SpringBoot" %}
                     <li><a href="/categories/springboot" class="">SpringBoot ({{category[1].size}})</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <ul>
+            {% for category in site.categories %}
+                {% if category[0] == "Quartz" %}
+                    <li><a href="/categories/quartz" class="">Quartz ({{category[1].size}})</a></li>
                 {% endif %}
             {% endfor %}
         </ul>
@@ -51,7 +58,7 @@
         <ul>
             {% for category in site.categories %}
                 {% if category[0] == "Github" %}
-                    <li><a href="/categories/github" class="">Github({{category[1].size}})</a></li>
+                    <li><a href="/categories/github" class="">Github ({{category[1].size}})</a></li>
                 {% endif %}
             {% endfor %}
         </ul>
@@ -60,7 +67,16 @@
         <ul>
             {% for category in site.categories %}
                 {% if category[0] == "Aws" %}
-                    <li><a href="/categories/aws" class="">Aws({{category[1].size}})</a></li>
+                    <li><a href="/categories/aws" class="">Aws ({{category[1].size}})</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+        <span class="nav__sub-title">IntelliJ</span>
+        <ul>
+            {% for category in site.categories %}
+                {% if category[0] == "IntelliJ" %}
+                    <li><a href="/categories/intellij" class="">IntelliJ ({{category[1].size}})</a></li>
                 {% endif %}
             {% endfor %}
         </ul>
