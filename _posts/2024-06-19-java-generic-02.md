@@ -143,6 +143,7 @@ toc_sticky: true
   - 타입 매개변수 : `GenericBox<T>`의 `T`  
   - 타입 인자(인수) : `GenericBox<Integer>` 의 `Integer`  
 
+<br>
 
 - ### 용어 정리
 
@@ -164,3 +165,13 @@ toc_sticky: true
 <br>
 
 - ### 제네릭 명명 관례
+  - 타입 매개변수는 대소문자 구분없이 사용이 가능하다. 
+  - 하지만 관례상 용도에 맞는 단어의 첫글자의 대문자를 사용한다.
+  ```
+  E - Element
+  K - Key
+  N - Number
+  T - Type
+  V - Value
+  S,U,V etc. - 2nd, 3rd, 4th types
+  ```
