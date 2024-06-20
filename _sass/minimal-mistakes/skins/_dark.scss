@@ -3,20 +3,20 @@
    ========================================================================== */
 
 /* Colors */
-$background-color: #252a34 !default;
-$text-color: #eaeaea !default;
-$primary-color: #00adb5 !default;
-$border-color: mix(#fff, $background-color, 20%) !default;
-$code-background-color: mix(#fe3939, $background-color, 50%) !default;
+$background-color: #252a34 !default;  // 블로그 배경색
+$text-color: #eaeaea !default;  // 블로그 글자색
+$primary-color: #00adb5 !default; // 
+$border-color: mix(#fff, $background-color, 20%) !default;  // 밑줄 색
+$code-background-color: mix(#fe3939, $background-color, 50%) !default;  // ``(grave) 로 감싼 글자의 배경색, $background-color 와 믹스해서 사용된다.
 $code-background-color-dark: mix(#000, $background-color, 20%) !default;
-$form-background-color: mix(#000, $background-color, 15%) !default;
-$footer-background-color: mix(#000, $background-color, 30%) !default;
-$link-color: mix($primary-color, $text-color, 40%) !default;
-$link-color-hover: mix(#fff, $link-color, 25%) !default;
-$link-color-visited: mix(#000, $link-color, 25%) !default;
-$masthead-link-color: $text-color !default;
-$masthead-link-color-hover: mix(#000, $text-color, 20%) !default;
-$navicon-link-color-hover: mix(#000, $background-color, 30%) !default;
+$form-background-color: mix(#000, $background-color, 15%) !default; // 입력란, 버튼 등의 배경색
+$footer-background-color: mix(#000, $background-color, 30%) !default; // footer 배경색
+$link-color: mix($primary-color, $text-color, 40%) !default;  // 링크색
+$link-color-hover: mix(#fff, $link-color, 25%) !default;  // 링크에 커서 올렸을 때 바뀔 색
+$link-color-visited: mix(#000, $link-color, 25%) !default; // 한번 클릭 했던 링크색
+$masthead-link-color: $text-color !default; // 블로그 상단 글자색
+$masthead-link-color-hover: mix(#000, $text-color, 20%) !default; // 블로그 상단 글자에 커서 올렸을 때 바뀔색
+$navicon-link-color-hover: mix(#000, $background-color, 30%) !default;  
 
 .author__urls.social-icons i,
 .author__urls.social-icons .svg-inline--fa,

@@ -175,3 +175,29 @@ toc_sticky: true
   V - Value
   S,U,V etc. - 2nd, 3rd, 4th types
   ```
+
+<br>
+
+- ### 제네릭의 타입 매개변수 다중 사용
+  - 제네릭의 타입 매개변수를 여러개 사용이 가능하다.
+    ```java
+    public class Generic<T, V> {}
+    ```
+
+<br>
+
+- ### 타입 인자 기본형 사용 불가
+  - 타입 인자로 기본형(int, double, boolean)은 사용할 수 없다. 
+  - 대신 래퍼 클래스(Integer, Double, Boolean)를 사용해야 한다.
+
+
+<br>
+
+- ### 제네릭의 Raw Type 사용은 지양하자.
+  
+  - 제네렉 클래스를 사용할 때 아래와 같이 타입을 지정하지 않고 사용이 가능하다. 
+  - 이런 것을 `로 타입(raw type)` 또는 `원시 타입` 이라고 한다.
+  ```java
+  GenericBox box = new GenericBox();
+  ```
+  - 로 타입 또는 원시 타입을 사용하는 경우 클래스 내부의 `타입 매개변수`는 `Object`로 사용된다고 이해하면 된다.
