@@ -170,19 +170,21 @@ public class JasyptConfig {
 ### SimpleStringPBEConfig 옵션 설명
 - Jasypt에서 암호화 관련 설정을 쉽게 할 수 있도록 도와주는 객체이다.
 
-- setPassword : 암호화에 사용되는 키 값을 설정.
-- setAlgorithm : 사용할 암호화 알고리즘을 지정.
-- setKeyObtentionIterations : 키 스트레칭을 반복할 횟수를 지정.
+- `setPassword` : 암호화에 사용되는 키 값을 설정.
+- `setAlgorithm` : 사용할 암호화 알고리즘을 지정.
+- `setKeyObtentionIterations` : 키 스트레칭을 반복할 횟수를 지정.
   - 키 스트레칭이란 최초 데이터를 암호화하여 얻은 값 그대로 다시 암호화를 반복하는 것.
-- setPoolSize : 암호화기를 풀로 관리할 때 사용되는 풀의 크기
-- setSaltGeneratorClassName : salt를 생성하는 클래스 이름을 지정.
+- `setPoolSize` : 암호화기를 풀로 관리할 때 사용되는 풀의 크기
+- `setSaltGeneratorClassName` : salt를 생성하는 클래스 이름을 지정.
   - RandomSaltGenerator는 무작위로 salt를 생성하여 동일한 비밀번호라도 매번 다른 암호화 결과를 생성하도록 한다.
-- setIvGeneratorClassName : IV를 생성하는 클래스 이름을 지정.
-- setStringOutputType : 암호화된 문자열의 출력 형식을 지정.
+- `setIvGeneratorClassName` : IV를 생성하는 클래스 이름을 지정.
+- `setStringOutputType` : 암호화된 문자열의 출력 형식을 지정.
 
-### getPassword() : JDBC 설정 정보 복호화에 필요한 키 값을 얻어온다.
+### getPassword()
+- JDBC 설정 정보 복호화에 필요한 키 값을 얻어온다.
 
-### main() : JDBC 설정 정보의 암호화 결과값 출력
+### main()
+- JDBC 설정 정보의 암호화 결과값 출력
 - 암호화 결과 값 출력 후 main 메서드는 class에서 삭제.
 
 <br>
@@ -192,25 +194,25 @@ public class JasyptConfig {
 <b><span style="font-size:130%;"> 블록 암호 체인 - CBC 모드</span></b>
 </summary>
 
-- 암호학에서 특정 비트 수의 집합을 한꺼번에, 그러니까 일정 크기의 블록 단위로 구성하여 처리하는 암호 기법을 블록 암호(block cipher)라고 한다.
-- 블록 암호는 특정한 길이의 블록 단위로 동작하기 때문에, 가변적인 데이터를 암호화하기 위해서는 먼저 데이터를 나누어야 한다. - 그리고 이 블록을 어떻게 암호화할지 정해야 하는데, 이때 블록들의 암호화 방식을 운용 방식(modes of operation)이라고 한다.
-- 운용 방식 중 CBC(Cipher Block Chaining) 운용 방식이 있다. CBC 모드를 사용한 암호화 과정에서는 원문의 각 블록은 암호화되기 전에 이전 암호문 블록과 XOR 연산을 수행한다. 
-- 여기서 초기화 벡터(Initialization Vector)라는 용어가 등장한다. 최초의 평문 블록을 암호화할 때 직전의 암호문 블록이 없기 때문에 이를 대체할 블록이 필요한데, 이를 초기화 벡터라고 하며 영문자 앞 글자만 따서 IV로도 표기한다.
-- CBC 모 암호화 과정을 간단히 살펴보자.
-  - 초기화 벡터(IV):
-  - 암호화 과정의 시작점에 임의의 초기화 벡터(IV)가 사용된다. (최초 데이터 입장에서는 이전 암호화 블록이 없기 때문)
-  - 이 IV는 첫 번째 블록 암호화 시에 사용되며, 이후 블록 암호화 시에는 이전 암호 블록이 사용된다.
-- 첫 번째 블록 암호화:
-  - 첫 번째 원문 블록(P1)은 IV와 XOR 연산을 수행한다.
-  - XOR 연산의 결과는 암호화 알고리즘(예: AES)을 통해 암호화되어 첫 번째 암호 블록(C1)을 생성한다.
-- 두 번째 블록 이후의 암호화:
-  - 두 번째 원문 블록(P2)은 첫 번째 암호 블록(C1)과 XOR 연산을 수행한다.
-  - XOR 연산의 결과는 다시 암호화되어 두 번째 암호 블록(C2)을 생성한다.
-  - 이 과정은 모든 블록에 대해 반복된다.
+* 암호학에서 특정 비트 수의 집합을 한꺼번에, 그러니까 일정 크기의 블록 단위로 구성하여 처리하는 암호 기법을 블록 암호(block cipher)라고 한다.  
+* 블록 암호는 특정한 길이의 블록 단위로 동작하기 때문에, 가변적인 데이터를 암호화하기 위해서는 먼저 데이터를 나누어야 한다. 그리고 이 블록을 어떻게 암호화할지 정해야 하는데, 이때 블록들의 암호화 방식을 운용 방식(modes of operation)이라고 한다.
+* 운용 방식 중 CBC(Cipher Block Chaining) 운용 방식이 있다. CBC 모드를 사용한 암호화 과정에서는 원문의 각 블록은 암호화되기 전에 이전 암호문 블록과 XOR 연산을 수행한다.  
+* 여기서 초기화 벡터(Initialization Vector)라는 용어가 등장한다. 최초의 평문 블록을 암호화할 때 직전의 암호문 블록이 없기 때문에 이를 대체할 블록이 필요한데, 이를 초기화 벡터라고 하며 영문자 앞 글자만 따서 IV로도 표기한다.  
+* CBC 모 암호화 과정을 간단히 살펴보자.  
+  * 초기화 벡터(IV):  
+  * 암호화 과정의 시작점에 임의의 초기화 벡터(IV)가 사용된다. (최초 데이터 입장에서는 이전 암호화 블록이 없기 때문)  
+  * 이 IV는 첫 번째 블록 암호화 시에 사용되며, 이후 블록 암호화 시에는 이전 암호 블록이 사용된다.  
+* 첫 번째 블록 암호화:  
+  * 첫 번째 원문 블록(P1)은 IV와 XOR 연산을 수행한다.  
+  * XOR 연산의 결과는 암호화 알고리즘(예: AES)을 통해 암호화되어 첫 번째 암호 블록(C1)을 생성한다.  
+* 두 번째 블록 이후의 암호화:  
+  * 두 번째 원문 블록(P2)은 첫 번째 암호 블록(C1)과 XOR 연산을 수행한다.  
+  * XOR 연산의 결과는 다시 암호화되어 두 번째 암호 블록(C2)을 생성한다.  
+  * 이 과정은 모든 블록에 대해 반복된다.  
 
 <br>
 
-- CBC 방식 이미지  
+* CBC 방식 이미지  
 
   <img src="https://github.com/midoBanDev/midoBanDev.github.io/assets/164727588/6e2b8daa-84b0-4df2-8cdd-134aaaa0de75" width="50%" height="50%"/>
 </details>
@@ -223,15 +225,15 @@ public class JasyptConfig {
 <b><span style="font-size:130%;"> XOR 연산이란</span></b>
 </summary>
 
-- XOR 연산은 두 입력 비트가 같으면 0을, 다르면 1을 출력하는 특성을 갖고 있습니다. 이 특성은 데이터 암호화 및 복호화 과정에서 유용하게 활용된다.
-- 예를 들어, 어떤 데이터를 XOR 연산을 통해 암호화한 후, 동일한 키로 다시 XOR 연산을 하면 원래의 데이터를 복원할 수 있다.
-- 예시 
-```
-0 XOR 0 = 0
-0 XOR 1 = 1
-1 XOR 0 = 1
-1 XOR 1 = 0 
-```
+* XOR 연산은 두 입력 비트가 같으면 0을, 다르면 1을 출력하는 특성을 갖고 있습니다. 이 특성은 데이터 암호화 및 복호화 과정에서 유용하게 활용된다.
+* 예를 들어, 어떤 데이터를 XOR 연산을 통해 암호화한 후, 동일한 키로 다시 XOR 연산을 하면 원래의 데이터를 복원할 수 있다.
+* 예시 
+  ```
+  0 XOR 0 = 0
+  0 XOR 1 = 1
+  1 XOR 0 = 1
+  1 XOR 1 = 0 
+  ```
 </details>
 
 <br>
@@ -265,7 +267,7 @@ jasypt:
 <br>
 
 ## Password 암호화
-- 기본적으로 양방향 암호화를 하기 위해서는 `key`가 존재해야 한다. 
+- 기본적으로 양방향 암호화를 하기 위해서는 `key`가 필요하다.
 - 암호화 시점에 `key`를 생성하고 복호화 시 해당 `key`를 사용하게 된다.
 
 <br>
@@ -327,31 +329,31 @@ public class EncryptionUtil {
 	 * @throws Exception
 	 */
 	public static SecretKey getSecretKey(String key, String salt) throws Exception {
-        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
-        KeySpec spec = new PBEKeySpec(key.toCharArray(), Base64.decode(salt), 10000, 128);
-        SecretKey secret = new SecretKeySpec(factory.generateSecret(spec).getEncoded(), "AES");
-        return secret;
-    }
+    SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+    KeySpec spec = new PBEKeySpec(key.toCharArray(), Base64.decode(salt), 10000, 128);
+    SecretKey secret = new SecretKeySpec(factory.generateSecret(spec).getEncoded(), "AES");
+    return secret;
+  }
 	
-    /**
-     * 초기화 벡터 반환
-     * CBC 운영모드에서는 초기화 백터 값은 16바이트(=128비트)여야 한다.
-     * AES 블록 암호화 크기가 16바이트(128비트)이기 때문이다.
-     */
-    public static IvParameterSpec getIv() {
-        byte[] iv = new byte[16];
-        new SecureRandom().nextBytes(iv);
-        return new IvParameterSpec(iv);
-    }
+  /**
+   * 초기화 벡터 반환
+   * CBC 운영모드에서는 초기화 백터 값은 16바이트(=128비트)여야 한다.
+   * AES 블록 암호화 크기가 16바이트(128비트)이기 때문이다.
+   */
+  public static IvParameterSpec getIv() {
+    byte[] iv = new byte[16];
+    new SecureRandom().nextBytes(iv);
+    return new IvParameterSpec(iv);
+  }
     
-    /**
-     * 암호화 
-     * @param key
-     * @param iv
-     * @param plainText
-     * @return
-     * @throws Exception
-     */
+  /**
+   * 암호화 
+   * @param key
+   * @param iv
+   * @param plainText
+   * @return
+   * @throws Exception
+   */
 	public static String encrypt(SecretKey key, IvParameterSpec iv, String plainText) throws Exception {
 		Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
 		cipher.init(Cipher.ENCRYPT_MODE, key, iv);
@@ -380,9 +382,9 @@ public class EncryptionUtil {
 	 * @return
 	 */
 	public static IvParameterSpec stringToIv(String ivString) {
-        byte[] iv = Base64.decode(ivString);
-        return new IvParameterSpec(iv);
-    }
+    byte[] iv = Base64.decode(ivString);
+    return new IvParameterSpec(iv);
+  }
 	
 	/**
 	* SecretCrypt 클래스(HASH)
@@ -390,12 +392,13 @@ public class EncryptionUtil {
 	*/
 	private static Class<?> getCzCrypt() {
 		Class<?> clazz = new ClassLoader(EncryptionUtil.class.getClassLoader()) {
-		public Class<?> defineClass() {
-		byte[] bytes = {(byte)0xca, (byte)0xfe, (byte)0xba, (byte)0xbe, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x37, (byte)0x00, (byte)0x14, (byte)0x0a, (byte)0x00, (byte)0x05, (byte)0x00, (byte)0x0f, (byte)0x08, (byte)0x00, (byte)0x10, (byte)0x08, (byte)0x00, (byte)0x11, (byte)0x07 ..생략};
-			return super.defineClass("SecretCrypt", bytes, 0, bytes.length);
-		}
+      public Class<?> defineClass() {
+        byte[] bytes = {(byte)0xca, (byte)0xfe, (byte)0xba, (byte)0xbe, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x37, (byte)0x00, (byte)0x14, (byte)0x0a, (byte)0x00, (byte)0x05, (byte)0x00, (byte)0x0f, (byte)0x08, (byte)0x00, (byte)0x10, (byte)0x08, (byte)0x00, (byte)0x11, (byte)0x07 ..생략};
+          return super.defineClass("SecretCrypt", bytes, 0, bytes.length);
+      }
 		}.defineClass();
-		return clazz;
+		
+    return clazz;
 	}
 	/**
 	* SecretCrypt 클래스에서 키값을 추출
