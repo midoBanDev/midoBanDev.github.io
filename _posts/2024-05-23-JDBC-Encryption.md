@@ -10,7 +10,7 @@ toc: true
 toc_sticky: true
 ---
 
-## JDBC 설정 정보 암호화
+# JDBC 설정 정보 암호화
 
 - JDBC 설정 정보를 평문으로 사용할 경우 보안에 매우 취약해 질 수 있다.
 - 따라서 JDBC 설정 정보를 암호화하여 관리하고자 한다.
@@ -28,7 +28,7 @@ http://www.jasypt.org/
 
 <br>
 
-## 우선 pom.xml 의존성을 추가하자.
+## 1. pom.xml 의존성 추가
 - Jasypt 라이브러리 : 암/복호화 Java 라이브러리
 - Bouncy Castle 라이브러리 : 다양한 암호화 알고리즘을 지원하는 Java 라이브러리
 
@@ -51,8 +51,15 @@ http://www.jasypt.org/
 <br>
 
 <details>
+<summary>알고리즘 종류</summary>
+
+- 테스트
+
+</details>
+
+<details>
 <summary> 
-<b><span style="font-size:130%;"> 알고리즘 종류</span></b>
+<b><span style="font-size:130%;">알고리즘 종류</span></b>
 </summary>
 
 - Jasypt는 기본적으로 JDK에서 제공하는 표준 알고리즘을 사용한다.  
@@ -64,10 +71,10 @@ http://www.jasypt.org/
   - DESede (Triple DES)
   - RSA (Rivest-Shamir-Adleman)
 
-- Bouncy Castle 라이브러리에서 지원되는 알고리즘
-  - PBEWithSHA256And128BitAES-CBC-BC
-  - PBEWithSHA256And192BitAES-CBC-BC
-  - PBEWithSHA256And256BitAES-CBC-BC
+* Bouncy Castle 라이브러리에서 지원되는 알고리즘
+  * PBEWithSHA256And128BitAES-CBC-BC
+  * PBEWithSHA256And192BitAES-CBC-BC
+  * PBEWithSHA256And256BitAES-CBC-BC
 
 - Bouncy Castle 라이브러리가 지원하는 암호화 알고리즘의 특징
   - PBE (Password-Based Encryption): 비밀번호를 기반으로 키를 생성하는 암호화 방식이다.
@@ -76,11 +83,12 @@ http://www.jasypt.org/
   - CBC (Cipher Block Chaining): 블록 암호화 모드로, 각 블록 암호화 시 이전 블록의 암호문을 사용하여 보안을 강화한다.
   - BC (Bouncy Castle): Bouncy Castle 프로바이더를 지정하여 해당 알고리즘을 사용함을 의미한다.
   - 이 알고리즘은 PBE와 AES, SHA-256을 결합하여 강력한 보안 수준을 제공한다. PBE는 사용자가 입력한 비밀번호를 기반으로 안전한 암호화 키를 생성하며, SHA-256 해시 알고리즘을 사용하여 키 스트레칭을 통해 보안을 강화한다. 생성된 키는 128비트 AES 암호화 알고리즘을 사용하여 데이터 암호화에 사용됩니다. CBC 모드는 각 블록을 암호화할 때 이전 블록의 암호문을 사용하므로 동일한 입력 데이터라도 서로 다른 암호문을 생성한다.
+
 </details>
 
 <br><br>
 
-## JasyptConfig class 설정
+## 2. JasyptConfig class 추가
 
 ```java
 package com.crizen.config;
@@ -238,7 +246,7 @@ public class JasyptConfig {
 
 <br>
 
-## application.yml 설정
+## 3. application.yml 설정 변경
 - stringEncryptor 클래스의 main 메서드에서 출력한 암호화 결과값을 `application.yml` 의 JDBC 설정정보에 평문 대신 넣어준다.
 - `ENC()` 의 괄호 안에 암호화 값을 넣어주면 된다.
 
@@ -256,17 +264,11 @@ spring:
     tomcat:
       max-active: 30
       max-idle: 10
-
-# password 키 암호화 결과 값 
-jasypt:
-  encryptor:
-    password: EWS0VtHe7U0T+rMujv7w95LLNezh2ZK754r6aZ3dYEQ=
-    iv-spec: aNWEonurjpgG1nICeByKYA==
 ```
 
-<br>
+<br><br>
 
-## Password 암호화
+# Password 암호화
 - 기본적으로 양방향 암호화를 하기 위해서는 `key`가 필요하다.
 - 암호화 시점에 `key`를 생성하고 복호화 시 해당 `key`를 사용하게 된다.
 
@@ -278,7 +280,6 @@ jasypt:
 
 <br>
 
-## EncryptionUtil 클래스 추가
 - 원하는 문자열을 암/복호화 하기 위한 클래스
 - 위에서 말했다시피 무언가 암호화를 하기 위해서는 `key`가 필요하다.
 - 그럼 해당 `key`를 또 관리해 줘야 하는 이슈가 발생한다. 
@@ -299,6 +300,39 @@ jasypt:
 - 데이터 암호화 알고리즘는 `AES + CBC + PKCS5Padding`를 사용한다.
 - 암호화 키인 `SecretKey` 생성 시 사용된 `key` + `salt` 값과 암호화 시 사용된 `IV` 값은 암호화 시점에 생성된 값 그대로 보관해야 한다. 복호화 시 필요.
 
+<br>
+
+## 1. SecretCrypt 클래스 추가
+- `SecretKey` 생성 시 필수 값인 `key`와 `salt`값을 보관하는 클래스
+- 해당 클래스는 난독화 후 프로젝트에 포함시키면 안된다.
+- 난독화를 진행하여 `EncryptionUtil` 클래스를 decompile 시 노출되지 않도록 한다.
+
+```java
+public class SecretCrypt {
+	
+	public static String getSalt() {
+		return "spvcalekjfsldkfj";
+	}
+	
+	public static String getPwd() {
+		return "cri%zen_#solu!ti$on_gcvaefad";
+	}
+}
+
+//class file 난독화
+public static void main(String[] args) throws IOException {
+		byte[] bytes = loadClassBytes("C:/Users/crizen/SecretCrypt.class");
+		StringBuilder sb = new StringBuilder();
+		for (byte b : bytes) {
+		    sb.append(String.format("(byte)0x%02x, ", b));
+		}
+		System.out.println(sb.toString());
+	}
+```
+
+<br>
+
+## 2. EncryptionUtil 클래스 추가
 
 ```java
 package com.crizen.util;
@@ -423,7 +457,7 @@ public class EncryptionUtil {
 
 <br>
 
-### IV(초기화백터)와 원하는 문자열의 암호화 결과값 추출
+## 3. IV(초기화백터)와 원하는 문자열의 암호화 결과값 추출
 - JDBC 설정 정보 암호화 시 사용한 `password`를 plainText에 넣어 주자.
 
 ```java
@@ -456,30 +490,25 @@ public class EncryptionUtil {
 
 <br>
 
-## SecretCrypt 클래스 추가
-- `SecretKey` 생성 시 필수 값인 `key`와 `salt`값을 보관하는 클래스
-- 해당 클래스는 난독화 후 프로젝트에 포함시키면 안된다.
-- 난독화를 진행하여 `EncryptionUtil` 클래스를 decompile 시 노출되지 않도록 한다.
+## 4. application.yml에 password 와 IV 암호화 결과값 설정 정보 추가
+```xml
+spring:
+  config:
+    activate:
+      on-profile: local
 
-```java
-public class SecretCrypt {
-	
-	public static String getSalt() {
-		return "spvcalekjfsldkfj";
-	}
-	
-	public static String getPwd() {
-		return "cri%zen_#solu!ti$on_gcvaefad";
-	}
-}
+  datasource:
+    driver-class-name: ENC(3k5FDHmbMsBNiPRrUgl+y7aw+7B2iE50iF+7z5xiqX8vBLZDYrSJwtTqGp99scWUTwpAFWW11lqaGLSafRLQdw==)
+    url: ENC(VUJK6HethGA6virjwe7Pg4mUBGhKBTl8XThsvh2xG4Hxjztb+HAcHF7wv4rYi0gaQiqssmKT9t7TwxM2B2fHpjSCf0L8HQGbEW4y0vcoaa4=)
+    username: ENC(Y6TohAkjx2A6nuuKWx2UGsrbkSAF61gsxfzX4oPMs6mGs04JWu4EtksZx/9Qsk7K)
+    password: ENC(ic9tw5YzBgE9yt/HIuXPv7gTVCHNyB559Hr+ZJ5jniLB3WP+hnhUwJK4t6KKUDuI)
+    tomcat:
+      max-active: 30
+      max-idle: 10
 
-//class file 난독화
-public static void main(String[] args) throws IOException {
-		byte[] bytes = loadClassBytes("C:/Users/crizen/SecretCrypt.class");
-		StringBuilder sb = new StringBuilder();
-		for (byte b : bytes) {
-		    sb.append(String.format("(byte)0x%02x, ", b));
-		}
-		System.out.println(sb.toString());
-	}
+# password, IV 암호화 결과 값 
+jasypt:
+  encryptor:
+    password: EWS0VtHe7U0T+rMujv7w95LLNezh2ZK754r6aZ3dYEQ=
+    iv-spec: aNWEonurjpgG1nICeByKYA==
 ```
