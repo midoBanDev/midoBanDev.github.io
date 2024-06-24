@@ -51,13 +51,6 @@ http://www.jasypt.org/
 <br>
 
 <details>
-<summary>알고리즘 종류</summary>
-
-- 테스트
-
-</details>
-
-<details>
 <summary> 
 <b><span style="font-size:130%;">알고리즘 종류</span></b>
 </summary>
