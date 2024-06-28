@@ -1,7 +1,7 @@
 ---
 title: "STS 가이드"
 layout: archive
-permalink: categories/idle
+permalink: categories/sts
 author_profile: true
 sidebar_main: true
 ---
