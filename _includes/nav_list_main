@@ -99,7 +99,7 @@
             {% endfor %}
         </ul>
 
-        <span class="nav__sub-title">IDLE</span>
+        <span class="nav__sub-title">IDE</span>
         <ul>
             {% for category in site.categories %}
                 {% if category[0] == "STS" %}
@@ -118,6 +118,15 @@
             {% for category in site.categories %}
                 {% if category[0] == "IntelliJ" %}
                     <li><a href="/categories/intellij" class="">IntelliJ ({{category[1].size}})</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+        <span class="nav__sub-title">Docker</span>
+        <ul>
+            {% for category in site.categories %}
+                {% if category[0] == "Docker" %}
+                    <li><a href="/categories/docker" class="">docker ({{category[1].size}})</a></li>
                 {% endif %}
             {% endfor %}
         </ul>

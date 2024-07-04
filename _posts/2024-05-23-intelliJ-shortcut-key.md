@@ -4,7 +4,7 @@ title:  "인텔리제이 단축키"
 categories:
   - IntelliJ
 tags:
-  - [IntelliJ, shortcut-key]
+  - [IntelliJ, IDE, shortcut-key]
 
 toc: true
 toc_sticky: true

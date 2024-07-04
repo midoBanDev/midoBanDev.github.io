@@ -4,7 +4,7 @@ title:  "VSCode - Markdown Preview 안 열릴 때(feat. 파일 복사도 안됨)
 categories:
   - VSCode
 tags:
-  - [VSCode, Markdown]
+  - [VSCode, IDE, Markdown]
 
 toc: true
 toc_sticky: true
