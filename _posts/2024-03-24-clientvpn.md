@@ -37,7 +37,7 @@ toc_sticky: true
 
 <br>
 
-#### 1단계 설명 중 '상호인증' 부분에 대한 이해를 돕기 위해 작성한다.
+### 1단계 설명 중 '상호인증' 부분에 대한 이해를 돕기 위해 작성한다.
 ```
 # 가이드 문서 중 내용 발췌
 이 목적으로 사용할 인증서가 아직 없는 경우 OpenVPN easy-rsa 유틸리티를 사용하여 인증서를 생성할 수 있습니다.  
@@ -65,42 +65,37 @@ ACM으로 가져오는 자세한 단계는 [상호 인증] 단원을 참조하�
 
 3. 서버 인증서와 클라이언트 인증서를 업로드 해주자. [인증서 및 키 업로드](https://github.com/wglee-github/develop-issue/wiki/ACM-Upload) 
 
-
+<br><br>
 
 ## 2단계: 클라이언트 VPN 엔드포인트 생성
-
 - 엔드포인트 생성 전 알아야할 정보 : `클라이언트 IPv4 CIDR`, `DNS 서버 IP`, `VPC`  
   - [클라이언트 VPN 엔드포인트 생성 가이드](https://github.com/wglee-github/develop-issue/wiki/AWS-Endpoint)
 
-
+<br><br>
 
 ## 3단계: 대상 네트워크 연결
-
 - [대상 네트워크 연결 가이드](https://github.com/wglee-github/develop-issue/wiki/Target-Network) 
 
-
+<br><br>
 
 ## 4단계: VPC에 대한 권한 부여 규칙 추가
-
 - [권한 부여 규칙 가이드](https://github.com/wglee-github/develop-issue/wiki/VPC-Authorization-Rules)
 
-
+<br><br>
 
 ## 5,6 단계: SKIP
 
-
+<br><br>
 
 ## 7단계: Client VPN 엔드포인트 구성 파일 다운로드
-
 - [엔드포인트 구성 파일 다운로드 가이드](https://github.com/wglee-github/develop-issue/wiki/Client-Config-File-Download)
 
-
+<br><br>
 
 ## 8단계: Client VPN 엔드포인트에 연결
-
 - [Openvpn 기반 클라이언트 애플리케이션 설치 가이드](https://github.com/wglee-github/develop-issue/wiki/Openvpn-install)
 
-
+<br><br>
 
 ## Client VPN 엔드포인트 삭제
 
