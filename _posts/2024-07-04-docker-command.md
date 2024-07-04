@@ -26,7 +26,6 @@ $ source ~/.bashrc
 터미널 창 껐다 다시 켜기
 ```
 
-<br>
 
 ## help 옵션
 
@@ -47,7 +46,6 @@ $ docker container --help
 $ docker container run --help
 ```
 
-<br>
 
 ## 이미지
 
@@ -84,7 +82,6 @@ $ docker image history [이미지명]
 $ docker image inspect [이미지명]
 ```
 
-<br>
 
 
 ## 도커
