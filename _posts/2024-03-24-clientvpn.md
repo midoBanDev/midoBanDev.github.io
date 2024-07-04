@@ -68,17 +68,20 @@ ACM으로 가져오는 자세한 단계는 [상호 인증] 단원을 참조하�
 <br>
 
 ## 2단계: 클라이언트 VPN 엔드포인트 생성
+
 - 엔드포인트 생성 전 알아야할 정보 : `클라이언트 IPv4 CIDR`, `DNS 서버 IP`, `VPC`  
   - [클라이언트 VPN 엔드포인트 생성 가이드](https://github.com/wglee-github/develop-issue/wiki/AWS-Endpoint)
 
 <br>
 
 ## 3단계: 대상 네트워크 연결
+
 - [대상 네트워크 연결 가이드](https://github.com/wglee-github/develop-issue/wiki/Target-Network) 
 
 <br>
 
 ## 4단계: VPC에 대한 권한 부여 규칙 추가
+
 - [권한 부여 규칙 가이드](https://github.com/wglee-github/develop-issue/wiki/VPC-Authorization-Rules)
 
 <br>
@@ -88,11 +91,13 @@ ACM으로 가져오는 자세한 단계는 [상호 인증] 단원을 참조하�
 <br>
 
 ## 7단계: Client VPN 엔드포인트 구성 파일 다운로드
+
 - [엔드포인트 구성 파일 다운로드 가이드](https://github.com/wglee-github/develop-issue/wiki/Client-Config-File-Download)
 
 <br>
 
 ## 8단계: Client VPN 엔드포인트에 연결
+
 - [Openvpn 기반 클라이언트 애플리케이션 설치 가이드](https://github.com/wglee-github/develop-issue/wiki/Openvpn-install)
 
 <br>
