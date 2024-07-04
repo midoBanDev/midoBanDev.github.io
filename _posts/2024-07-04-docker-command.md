@@ -26,7 +26,7 @@ $ source ~/.bashrc
 터미널 창 껐다 다시 켜기
 ```
 
-<br><br>
+<br>
 
 ## help 옵션
 - 명령에 관련 help는 `명령어 --help` 형식으로 입력하면 됨
@@ -46,7 +46,7 @@ $ docker container --help
 $ docker container run --help
 ```
 
-<br><br>
+<br>
 
 ## 이미지
 
@@ -83,7 +83,7 @@ $ docker image history [이미지명]
 $ docker image inspect [이미지명]
 ```
 
-<br><br>
+<br>
 
 
 ## 도커
