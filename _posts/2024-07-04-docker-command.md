@@ -24,11 +24,11 @@ $ source ~/.bashrc
 터미널 창 껐다 다시 켜기
 ```
 
-<br>
-<br>
-<span style="margin-left:30%">--------------------------------------------</span>
-<br>
-<br>
+<div style="padding-top:100px;"></div>
+<span style="margin-left:35%;">⊙</span>
+<span style="margin-left:10%">⊙</span>
+<span style="margin-left:10%">⊙</span>
+<div style="padding-top:100px;"></div>
 
 # help 옵션
 
@@ -51,20 +51,43 @@ $ docker container --help
 $ docker container run --help
 ```
 
-<br>
-<br>
-<span style="margin-left:30%">--------------------------------------------</span>
-<br>
-<br>
+<div style="padding-top:100px;"></div>
+<span style="margin-left:35%;">⊙</span>
+<span style="margin-left:10%">⊙</span>
+<span style="margin-left:10%">⊙</span>
+<div style="padding-top:100px;"></div>
 
 # 이미지(Image)
 - 컨테이너를 실행하기 위한 프로그램이 들어있는 압축파일
 
+<br>
 
-## 이미지 형식
+## 이미지 네이밍 규칙
+```
+레지스트리주소/프로젝트명/이미지명:이미지태그
+```
+- `레지스트리주소`를 생략할 경우 default로 `docker.io` 주소가 셋팅된다.
+- `프로젝트명`을 생략할 경우 default로 `library` 가 셋팅된다.
+- `이미지태그`를 생략할 경우 default로 `latest`가 셋팅된다.
 
 
-## 이미지 가져오기
+```bash
+# naginx 라는 이미지명만 입력한 경우
+$ docker [명령어] nginx 
+
+# 실제 Docker에서 아래와 같이 default 값을 붙여서 실행되게 된다.
+$ docker [명령어] docker.io/library/nginx:latest
+
+# 프로젝트명과 이미지명만 입력한 경우
+$ docker [명령어] myproject/nginx
+
+# 실제 Docker에서 아래와 같이 default 값을 붙여서 실행되게 된다.
+$ docker [명령어] docker.io/myproject/nginx:latest
+```
+
+<br>
+
+## 로컬 레지스트리로 이미지 다운로드
 - `pull` 명령어 사용
 
 ```bash
@@ -73,7 +96,16 @@ $ docker pull [이미지명]
 
 <br>
 
-## 이미지 내보내기
+## 로컬 레지스트리의 새로운 이미지명 추가
+- `tag` 명령어 사용
+
+```bash
+$ docker tag [기존이미지명] [추가할이미지명]
+```
+
+<br>
+
+## 레지스트리에 이미지 업로드
 - `push` 명령어 사용
 
 ```bash
@@ -125,11 +157,11 @@ $ docker (image) inspect [이미지명]
 $ docker commit -m "[커밋내용]" [실행중인컨테이너명] [생성할이미지명]
 ```
 
-<br>
-<br>
-<span style="margin-left:30%">--------------------------------------------</span>
-<br>
-<br>
+<div style="padding-top:100px;"></div>
+<span style="margin-left:35%;">⊙</span>
+<span style="margin-left:10%">⊙</span>
+<span style="margin-left:10%">⊙</span>
+<div style="padding-top:100px;"></div>
 
 # 컨테이너(Container)
 
@@ -175,11 +207,11 @@ $ docker rm [컨테이너명/ID]
 $ docker rm -f [컨테이너명/ID]
 ```
 
-<br>
-<br>
-<span style="margin-left:30%">--------------------------------------------</span>
-<br>
-<br>
+<div style="padding-top:100px;"></div>
+<span style="margin-left:35%;">⊙</span>
+<span style="margin-left:10%">⊙</span>
+<span style="margin-left:10%">⊙</span>
+<div style="padding-top:100px;"></div>
 
 # Doker run
 - [] 괄호는 생략 가능
@@ -277,4 +309,66 @@ $ docker start [컨테이너명/ID]
 
 ```bash
 $ docker restart [컨테이너명/ID]
+```
+
+<br>
+
+## 실행 중인 Docker Container 로그 확인
+- `logs` 명령어, `f` 옵션 사용
+
+```bash
+$ docker logs -f [컨테이너명/ID]
+```
+
+<br>
+
+## Container와 호스트 머신 간 파일 복사
+- `cp` 명령어 사용
+
+```bash
+$ docker cp [원본위치] [복사위치]
+```
+
+<br>
+
+## Container에서 호스트 머신으로 파일 복사
+- `cp` 명령어 사용
+
+```bash
+$ docker cp [컨테이너명:원본위치] [복사위치]
+```
+
+<br>
+
+## 호스트 머신에서 Container로 파일 복사
+- `cp` 명령어 사용
+
+```bash
+$ docker cp [원복위치] [컨테이너명:복사위치]
+```
+
+<br><br>
+
+# Docker Network 
+
+## 네트워크 목록 확인
+
+```bash
+$ docker network ls
+```
+
+<br>
+
+## 네트워크 생성
+- `network` 명령어, `create` 명령어 사용
+
+```bash
+$ docker network create [네트워크명]
+```
+
+
+## Docker build
+
+```bash
+$ docker buid -t [이미지명] [Dockerfile경로]
 ```
