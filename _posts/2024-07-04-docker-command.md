@@ -76,6 +76,7 @@ Usage:  docker image COMMAND
 <div markdown="1">
 
 - `build` : Dockerfile을 사용하여 이미지를 빌드한다.
+  - df
   ```
   Usage:  docker buildx build [OPTIONS] PATH | URL | -
   ```
@@ -84,7 +85,7 @@ Usage:  docker image COMMAND
   ```
   Usage:  docker image history [OPTIONS] IMAGE
   ```
-  
+
 - `import` : tarball의 내용을 가져와 파일 시스템 이미지를 생성한다.
 - `inspect` : 하나 이상의 이미지 상세 정보(metadata)를 보여준다.(여러 이미지는 공백으로 구분)
 - `load` : tar 아카이브 또는 STDIN에서 이미지를 로드한다.
@@ -274,8 +275,47 @@ $ docker rm -f (컨테이너명/ID)
 ## Docker build
 
 ```bash
-$ docker buid -t (이미지명) (Dockerfile경로)
+$ docker build -t (이미지명) (Dockerfile경로)
 ```
+
+<br>
+
+- `Docker build --help` 명령어를 실행하면 사용법에 `docker buildx build ..` 라고 나온다.
+- 그렇다고 `docker build` 명령어를 사용할 수 없는 것은 아니고 `Docker CLI 19.03` 이후 버전부터 `buildx`를 사용할 수 있도록 지원된 후 기본으로 `buildx` 사용을 권장하는 것 같다.
+- `buildx`에 대해 간단히 설명하면 이미지를 빌드 할 때 `buildx`를 사용하면 다양한 플랫폼에서 사용할 수 있도록 이미지를 만들 수 있다. 바꿔 말하면 빌드된 이미지(예:애플리케이션)가 모든 플랫폼에서 실행되지 않는다는 말이 된다. 
+- 자세한 내용은 아래 `buildx란`을 참고하자.
+
+## Buildx 란
+<details>
+<summary> 
+<b><span>자세히 보기</span></b>
+</summary>
+
+<div markdown="1">
+
+<br>
+
+Docker Buildx는 Docker의 공식적인 멀티플랫폼 빌드 도구이다.  
+Buildx를 사용하면 동일한 Dockerfile로 여러 아키텍처나 운영 체제에 대한 이미지를 빌드할 수 있다.  
+이는 다양한 환경에서 동일한 애플리케이션을 실행하거나 배포할 때 유용하다.  
+
+여기서 말하는 다양한 플랫폼이란 `운영체제와 하드웨어 아키텍처`를 아우르는 말이다.
+우리가 많이 사용하는 `Window OS`가 `운영체제`이다. 또 다른 운영체제로는 `MaxOS`, `LinuxOS` 등이 있다.   
+이런 운영체제 안에는 하드웨어 아키텍처가 존재하며, 이는 `CPU`의 구조를 의미한다.  
+하드웨어 아키텍처(CPU)의 종류에는 다음과 같은 것들이 있다.   
+- Window : x86, x86_64, ARM 등
+- Linux : x86, x86_64, ARM, ARM64, ADM64, POWER, s390x 등
+- Mac : x86, Appli Silicon(M1, M2) 등
+
+현재 내 PC에서 실행되는 이미지가 다른 플랫폼에서는 실행되지 않을 수 있다.  
+빌드 시점에 다양한 플랫폼에 실행 가능 하도록 빌드할 수 있게 도와주는 도구가 `buildx`이다.
+
+자세한 내용은 나중에 업데이트..
+
+</div>
+</details>
+
+
 
 <div style="padding-top:100px;"></div>
 <span style="margin-left:35%;">⊙</span>
