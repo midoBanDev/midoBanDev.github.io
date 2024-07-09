@@ -30,7 +30,7 @@ $ source ~/.bashrc
 <span style="margin-left:10%">⊙</span>
 <div style="padding-top:100px;"></div>
 
-# help 옵션
+# help 옵션 사용
 
 ## docker
 ```bash
@@ -47,6 +47,8 @@ $ docker container --help
 <br>
 
 ## container run
+- container 명령어 생략 가능
+
 ```bash
 $ docker container run --help
 ```
@@ -60,10 +62,14 @@ $ docker container run --help
 # 이미지(Image)
 - 컨테이너를 실행하기 위한 프로그램이 들어있는 압축파일
 
+```
+Usage:  docker image COMMAND
+```
+
 <br>
 
 ## 이미지 옵션
-<details style="margin:10px 10px; font-size:15px;">
+<details>
 <summary> 
 <b><span>옵션</span></b>
 </summary>
@@ -71,7 +77,15 @@ $ docker container run --help
 <div markdown="1">
 
 - `build` : Dockerfile을 사용하여 이미지를 빌드한다.
+  
+  ```
+  Usage:  docker buildx build [OPTIONS] PATH | URL | -
+  ```
 - `history` : 이미지의 레이어 히스토리를 보여준다.
+
+  ```
+  Usage:  docker image history [OPTIONS] IMAGE
+  ```
 - `import` : tarball의 내용을 가져와 파일 시스템 이미지를 생성한다.
 - `inspect` : 하나 이상의 이미지 상세 정보(metadata)를 보여준다.(여러 이미지는 공백으로 구분)
 - `load` : tar 아카이브 또는 STDIN에서 이미지를 로드한다.
