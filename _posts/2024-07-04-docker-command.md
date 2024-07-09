@@ -62,6 +62,32 @@ $ docker container run --help
 
 <br>
 
+## 이미지 옵션
+<details style="margin:10px 10px; font-size:15px;">
+<summary> 
+<b><span>옵션</span></b>
+</summary>
+
+<div markdown="1">
+
+- `build` : Dockerfile을 사용하여 이미지를 빌드한다.
+- `history` : 이미지의 레이어 히스토리를 보여준다.
+- `import` : tarball의 내용을 가져와 파일 시스템 이미지를 생성한다.
+- `inspect` : 하나 이상의 이미지 상세 정보(metadata)를 보여준다.(여러 이미지는 공백으로 구분)
+- `load` : tar 아카이브 또는 STDIN에서 이미지를 로드한다.
+- `ls` : 이미지의 목록을 보여준다.
+- `prune` : 사용하지 않는 이미지를 제거합니다.
+- `pull` : 레지스트리에서 이미지를 다운로드 한다.
+- `push` : 이미지를 레지스트리에 업로드 한다.
+- `rm` : 하나 이상의 이미지를 제거한다.(여러 이미지는 공백으로 구분)
+- `save` : 하나 이상의 이미지를 tar 아카이브로 저장한다.
+- `tag` : source 이미지를 참조하여 새로운 이미지를 생성한다.
+
+</div>
+</details>
+
+<br>
+
 ## 이미지 네이밍 규칙
 ```
 레지스트리주소/프로젝트명/이미지명:이미지태그
@@ -171,6 +197,22 @@ $ docker commit -m "(커밋내용)" (실행중인컨테이너명) (생성할이�
 
 # 컨테이너(Container)
 
+<br>
+
+## Container 옵션
+<details style="margin:10px 10px; font-size:15px;">
+<summary> 
+<b><span>옵션</span></b>
+</summary>
+
+<div markdown="1">
+
+- `attach` : 실행 중인 컨테이너에 로컬 표준 입력, 출력 및 오류 스트림을 연결한다.
+
+</div>
+</details>
+
+<br>
 
 ## 실행 중인 Docker Container의 세부정보(메타데이터) 확인
 - `container` 명령어(생략가능), `inspect` 명령어 사용
@@ -449,4 +491,99 @@ $ docker network rm (네트워크명)
 
 ```bash
 root@3b7914e19a2a:/# cat /etc/resolv.conf
+```
+
+<div style="padding-top:100px;"></div>
+<span style="margin-left:35%;">⊙</span>
+<span style="margin-left:10%">⊙</span>
+<span style="margin-left:10%">⊙</span>
+<div style="padding-top:100px;"></div>
+
+# Docker Volume && Bind Mount
+- `Volume`은 도커가 자동으로 관리하는 영역이기 때문에 사용자가 별도로 확인하거나 수정할 수 없다.
+- 사용자가 원하는 경로로 지정 후 관리하고 싶은 경우에는 `Bind Mount`를 사용해야 한다.
+
+<br>
+
+## Volume 리스트 조회
+- `volume` 명령어 사용
+
+```bash
+$ docker volume ls
+```
+
+<br>
+
+## Volume 상세 정보 조회
+- `volume` 명령어, `rm` 명령어 사용
+
+```bash
+$ docker [volume] inspect (볼륨명)
+```
+
+<br>
+
+## Volume 생성
+- `volume` 명령어, `create` 명령어 사용
+
+```bash
+$ docker volume create (볼륨명)
+```
+
+<br>
+
+## Volume 삭제
+- `volume` 명령어, `rm` 명령어 사용
+
+```bash
+$ docker volume rm (볼륨명)
+```
+
+<br>
+
+## Volume Mount
+- 아래 예제는 `mydata` 라는 volume을 생성한 상황이다.
+- `v` 옵션 사용. {볼륨명}:{컨테이너 내부 경로}
+
+```bash
+$ docker run -d --name (원하는컨테이너명) -v (불륨명):(컨테이너내부경로) (이미지명)
+
+# Ex.
+$ docker run -d --name my-postgres-2 -v mydata://var/lib/postgresql/data postgres:13
+```
+
+<br>
+
+## Bind Mount
+- `v` 옵션 사용
+
+```bash
+$ docker run -d --name (원하는컨테이너명) -v (HostOS의경로):(컨테이너내부경로) (이미지명)
+
+# Ex.
+$ docker run -d --name my-nginx-b -v C:\Users\crizen\Desktop\index:/usr/share/nginx/html nginx
+```
+
+<br>
+
+## Mount 상세 정보 확인
+- `v` 옵션 사용
+
+```bash
+$ docker container inspect (컨테이너명)
+```
+- Type : Mount Type
+- Source : HostOS의 경로
+- Destination : 컨테이너 내부 경로
+```
+"Mounts": [
+            {
+                "Type": "bind",
+                "Source": "C:\\Users\\crizen\\Desktop\\easydocker\\index",
+                "Destination": "/usr/share/nginx/html",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            }
+        ],
 ```
