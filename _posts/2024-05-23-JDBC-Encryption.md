@@ -220,7 +220,7 @@ public class JasyptConfig {
 
 * CBC 방식 이미지  
 
-  <img src="https://github.com/midoBanDev/midoBanDev.github.io/assets/164727588/6e2b8daa-84b0-4df2-8cdd-134aaaa0de75" width="50%" height="50%"/>
+  <img src="https://github.com/midoBanDev/midoBanDev.github.io/assets/164727588/6e2b8daa-84b0-4df2-8cdd-134aaaa0de75" width="80%" height="80%"/>
 
 </div>  
 </details>
