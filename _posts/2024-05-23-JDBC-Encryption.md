@@ -55,6 +55,8 @@ http://www.jasypt.org/
 <b><span style="font-size:130%;">알고리즘 종류</span></b>
 </summary>
 
+<div markdown="1">
+
 - Jasypt는 기본적으로 JDK에서 제공하는 표준 알고리즘을 사용한다.  
   - PBEWithMD5AndDES
   - PBEWithMD5AndTripleDES
@@ -77,6 +79,7 @@ http://www.jasypt.org/
   - BC (Bouncy Castle): Bouncy Castle 프로바이더를 지정하여 해당 알고리즘을 사용함을 의미한다.
   - 이 알고리즘은 PBE와 AES, SHA-256을 결합하여 강력한 보안 수준을 제공한다. PBE는 사용자가 입력한 비밀번호를 기반으로 안전한 암호화 키를 생성하며, SHA-256 해시 알고리즘을 사용하여 키 스트레칭을 통해 보안을 강화한다. 생성된 키는 128비트 AES 암호화 알고리즘을 사용하여 데이터 암호화에 사용됩니다. CBC 모드는 각 블록을 암호화할 때 이전 블록의 암호문을 사용하므로 동일한 입력 데이터라도 서로 다른 암호문을 생성한다.
 
+</div>
 </details>
 
 <br><br>
@@ -195,6 +198,8 @@ public class JasyptConfig {
 <b><span style="font-size:130%;"> 블록 암호 체인 - CBC 모드</span></b>
 </summary>
 
+<div markdown="1">
+
 * 암호학에서 특정 비트 수의 집합을 한꺼번에, 그러니까 일정 크기의 블록 단위로 구성하여 처리하는 암호 기법을 블록 암호(block cipher)라고 한다.  
 * 블록 암호는 특정한 길이의 블록 단위로 동작하기 때문에, 가변적인 데이터를 암호화하기 위해서는 먼저 데이터를 나누어야 한다. 그리고 이 블록을 어떻게 암호화할지 정해야 하는데, 이때 블록들의 암호화 방식을 운용 방식(modes of operation)이라고 한다.
 * 운용 방식 중 CBC(Cipher Block Chaining) 운용 방식이 있다. CBC 모드를 사용한 암호화 과정에서는 원문의 각 블록은 암호화되기 전에 이전 암호문 블록과 XOR 연산을 수행한다.  
@@ -216,6 +221,8 @@ public class JasyptConfig {
 * CBC 방식 이미지  
 
   <img src="https://github.com/midoBanDev/midoBanDev.github.io/assets/164727588/6e2b8daa-84b0-4df2-8cdd-134aaaa0de75" width="50%" height="50%"/>
+
+</div>  
 </details>
 
 
@@ -226,15 +233,19 @@ public class JasyptConfig {
 <b><span style="font-size:130%;"> XOR 연산이란</span></b>
 </summary>
 
-* XOR 연산은 두 입력 비트가 같으면 0을, 다르면 1을 출력하는 특성을 갖고 있습니다. 이 특성은 데이터 암호화 및 복호화 과정에서 유용하게 활용된다.
-* 예를 들어, 어떤 데이터를 XOR 연산을 통해 암호화한 후, 동일한 키로 다시 XOR 연산을 하면 원래의 데이터를 복원할 수 있다.
-* 예시 
+<div markdown="1">
+
+- XOR 연산은 두 입력 비트가 같으면 0을, 다르면 1을 출력하는 특성을 갖고 있습니다. 이 특성은 데이터 암호화 및 복호화 과정에서 유용하게 활용된다.
+- 예를 들어, 어떤 데이터를 XOR 연산을 통해 암호화한 후, 동일한 키로 다시 XOR 연산을 하면 원래의 데이터를 복원할 수 있다.
+- 예시 
   ```
   0 XOR 0 = 0
   0 XOR 1 = 1
   1 XOR 0 = 1
   1 XOR 1 = 0 
   ```
+
+</div> 
 </details>
 
 <br>
