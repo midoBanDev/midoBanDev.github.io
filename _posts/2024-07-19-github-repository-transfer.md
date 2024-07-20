@@ -40,7 +40,7 @@ toc_sticky: true
 
 ## 동일 계정 내에서 repository를 이전하는 방법
 - 만약 이전해야 할 repository가 Github 블로그인 경우 사전 작업
-  - repository 이름을 먼저 변경하자.
+  - 먼저 repository 이름을 변경해 주자.
   - Github 블로그를 사용하기 위해서는 repository 명을 `계정명 + github.io` 로 지정해야한다. 즉, 이름을 임의로 지정할 수 없기 때문에 새로 repository로 Github 블로그를 사용하기 위해 기존 Github 블로그로 사용한 repository의 이름을 변경해주자.
   - `repository` 선택 후 `Settings` → `General`의 Repository name 항목에서 변경할 수 있다.
   - 막 변경해도 된다. 어차피 나중에 삭제할 repository다.
