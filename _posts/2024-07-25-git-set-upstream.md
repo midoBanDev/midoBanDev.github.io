@@ -19,12 +19,11 @@ git pull 또는 git push 작업을 위해 기본적으로 추적하고 상호작
 업스트림 브랜치(upstream branch)를 설정하지 않으면, github나 gitlab에 브랜치가 존재하더라도 Git은 어느 원격 브랜치와 비교해야하는지, 변경 사항을 어디로 푸시해야 하는지 알 수 없다. 
 ```
 
-- 업스트림 브랜치가 설정되어 있지 않으면 `git push`를 할 경우 `has no upstream branch` 에러가 발생한다.
-- 일반적으로 최초 local repository를 생성하는 경우에 발생한다.
-
-<img src="https://github.com/user-attachments/assets/b19327a1-0cd9-4ace-8be0-fa327a089ae4" width="80%" height="80%"/>
-
 <br>
+
+- 업스트림 브랜치가 설정되어 있지 않으면 `git push`를 할 경우 `has no upstream branch` 에러가 발생한다.
+
+  <img src="https://github.com/user-attachments/assets/b19327a1-0cd9-4ace-8be0-fa327a089ae4" width="80%" height="80%"/>
 
 
 <div style="padding-top:100px;"></div>
@@ -50,7 +49,7 @@ git pull 또는 git push 작업을 위해 기본적으로 추적하고 상호작
   
 <br>  
 
-- 설정 전
+- 업스트림 설정이 되어 있지 않은 경우.
 
   <img src="https://github.com/user-attachments/assets/feffaae2-d214-4cfe-9e73-f35ba2f7223d" width="80%" height="80%"/>  
 
@@ -69,7 +68,7 @@ $ git branch --set-upstream-to=origin/develop develop
 ```
 <img src="https://github.com/user-attachments/assets/69971c31-87b4-435f-871d-e0a118b86069" width="80%" height="80%"/>
 
-#### 설정 완료 후 `git push` 명령어만 실행해주면 된다.
+- 설정 완료 후 `git push` 명령어만 실행해주면 된다.
 
 <br><br>
 
