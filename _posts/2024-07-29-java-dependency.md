@@ -50,12 +50,14 @@ toc_sticky: true
 <br>
 
 ### 클래스 의존성의 종류
+- 연관관계, 의존관계, 상속관계, 실체화관계
 
-<img src="https://github.com/user-attachments/assets/57dd1898-ed2f-44c1-a847-59b89193c73b" width="80%" height="80%"/>
+  <img src="https://github.com/user-attachments/assets/57dd1898-ed2f-44c1-a847-59b89193c73b" width="80%" height="80%"/>
 
 <br>
 
-- 연관관계(Association) : A 클래스에 B클래스로 이동할 수 있도록 객체참조를 하는 경우 (영구적 관계)
+#### 연관관계(Association)
+- A 클래스에 B클래스로 이동할 수 있도록 객체참조를 하는 경우 (영구적 관계)
 
   ```java
   class A {
@@ -65,7 +67,8 @@ toc_sticky: true
 
 <br>
 
-- 의존관계(Dependency) : A 클래스 메서드의 파라미터에 B 타입이 나오거나, 리턴타입에 B 타입이 나오거나, 메서드 안에서 B 타입의 인스턴스를 생성하는 경우 (일시적 관계)
+#### 의존관계(Dependency)
+- A 클래스 메서드의 파라미터에 B 타입이 나오거나, 리턴타입에 B 타입이 나오거나, 메서드 안에서 B 타입의 인스턴스를 생성하는 경우 (일시적 관계)
 
   ```java
   class A {
@@ -77,8 +80,9 @@ toc_sticky: true
 
 <br>
 
-- 상속관계(Inheritance) : A가 B를 상속하는 경우
-    - B클래스의 구현이 변경된 경우에도 A가 영향을 받는다.
+#### 상속관계(Inheritance)
+- A가 B를 상속하는 경우
+  - B클래스의 구현이 변경된 경우에도 A가 영향을 받는다.
 
   ```java
   class A extends B {}
@@ -86,14 +90,15 @@ toc_sticky: true
 
 <br>
 
-- 실체화 관계(Realization) : A가 B 인터페이스를 구현하는 경우
-    - B 인터페이스의 `오퍼레이션 시그니쳐`가 변경된 경우에만 영향을 받는다.
+#### 실체화 관계(Realization)
+- A가 B 인터페이스를 구현하는 경우
+  - B 인터페이스의 `오퍼레이션 시그니쳐`가 변경된 경우에만 영향을 받는다.
 
   ```java
   class A implements B {}
   ```
 
-<br>
+<br><br>
 
 ### 패키지 의존성
 
@@ -207,11 +212,7 @@ toc_sticky: true
 
 ### 다시 말해 설계의 핵심은 코드를 배치하는 데 있어서 변경에 초점을 맞추면 된다.
 
-<div style="padding-top:100px;"></div>
-<span style="margin-left:35%;">⊙</span>
-<span style="margin-left:10%">⊙</span>
-<span style="margin-left:10%">⊙</span>
-<div style="padding-top:100px;"></div>
+<br>
 
 ## 출처
 
