@@ -50,7 +50,7 @@ toc_sticky: true
 <br>
 
 ### 클래스 의존성의 종류
-- 연관관계, 의존관계, 상속관계, 실체화관계
+- `연관관계`, `의존관계`, `상속관계`, `실체화관계`로 나눌 수 있다.
 
   <img src="https://github.com/user-attachments/assets/57dd1898-ed2f-44c1-a847-59b89193c73b" width="80%" height="80%"/>
 
