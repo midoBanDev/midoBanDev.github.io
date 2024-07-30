@@ -52,8 +52,15 @@ figure.highlight {
   }
 }
 
+/*[modify] coding box 영역*/
 .highlight pre {
   width: 100%;
+}
+
+/*[modify] coding 내부 영역*/
+.highlight pre code {
+  font-size: 120%;
+  font-family: Consolas
 }
 
 .highlight .hll {
