@@ -14,6 +14,11 @@ toc_sticky: true
 ## Font 추가 - `main.scss`
 
 - 원하는 폰트 추가
+  - 눈누 폰트 사이트 : (https://noonnu.cc/)
+  - 사이트 접속 후 원하는 폰트 선택 후 `웹폰트로 사용`부분 복사하면 된다.
+
+    <img src="https://github.com/user-attachments/assets/c23c2231-ad1c-4083-a4f8-01fb9d12f827" width="80%" height="80%"/>
+  
 - main.scss 파일에 아래 내용 추가해주면 된다.
 
 ```css
@@ -44,7 +49,7 @@ toc_sticky: true
 
 ## 블로그 전체 Font 적용 - `_variables.scss`
 
-- `$customFont` 변수를 선언해 주고 main.scss에 추가한 `font-family` 값 그대로 적용해주자.
+- `$customFont` 변수를 선언해 주고 main.scss에 추가한 폰트 중 원하는 `font-family` 값을 그대로 넣어주면 된다.
 - `$serif`, `$sans-serif`, `$monospace` 변수에 `$customFont`를 셋팅해주면 된다.
 
 ```css
