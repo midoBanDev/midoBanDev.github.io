@@ -246,6 +246,34 @@ AOP는 Aspect Oriented Programming의 약자로 `관점 지향 프로그래밍`�
       동일한 추상화 수준을 유지란 기능을 정의하는 연산 부분(저수준 추상화)과 메서드의 호출(고수준 추상화)을  
       혼합하여 사용하지 말라는 의미이다.
       ```
+
+      - 다양한 추상화 수준 혼합한 예시
+
+        ```java
+        public class ShoppingCart {
+            public double calculateTotalPrice() {
+                double total = 0;
+                for (Item item : items) {
+                    total += item.getPrice() * item.getQuantity();  // 저수준 작업
+                }
+                double taxRate = 0.08;
+                total += total * taxRate;  // 저수준 작업
+                logToDatabase(total);  // 고수준 작업
+                System.out.println("Total price calculated: " + total);  // 고수준 작업
+                return total;
+            }
+
+            private void logToDatabase(double total) {
+                // 데이터베이스 연결 코드 (저수준 작업)
+                DatabaseConnection connection = new DatabaseConnection("db_url");
+                connection.connect();
+                connection.insert("INSERT INTO totals (amount) VALUES (?)", total);
+                connection.close();
+            }
+        }
+        ```
+      <br>
+
       - 동일한 추상화 수준 예시
 
         ```java
@@ -271,32 +299,6 @@ AOP는 Aspect Oriented Programming의 약자로 `관점 지향 프로그래밍`�
 
             private double calculateTotal(double subtotal, double tax) {
                 return subtotal + tax; // 저수준 작업
-            }
-        }
-        ```
-
-      - 다양한 추상화 수준 혼합
-
-        ```java
-        public class ShoppingCart {
-            public double calculateTotalPrice() {
-                double total = 0;
-                for (Item item : items) {
-                    total += item.getPrice() * item.getQuantity();  // 저수준 작업
-                }
-                double taxRate = 0.08;
-                total += total * taxRate;  // 저수준 작업
-                logToDatabase(total);  // 고수준 작업
-                System.out.println("Total price calculated: " + total);  // 고수준 작업
-                return total;
-            }
-
-            private void logToDatabase(double total) {
-                // 데이터베이스 연결 코드 (저수준 작업)
-                DatabaseConnection connection = new DatabaseConnection("db_url");
-                connection.connect();
-                connection.insert("INSERT INTO totals (amount) VALUES (?)", total);
-                connection.close();
             }
         }
         ```
