@@ -235,7 +235,7 @@ AOP는 Aspect Oriented Programming의 약자로 `관점 지향 프로그래밍`�
 3. 작게 만들고 한 가지 일만 해라(SRP)
    - 함수가 한 가지 일만 한다는 말은 꼭 하나의 기능만을 가진다는 의미 보다는 하나의 추상화 수준에서 동작해야 한다는 의미이다.
 4. 함수내의 동일한 추상화 수준을 유지하라.
-    <details style="margin-top:-10px;">
+    <details>
       <summary> 
       <b><span style="font-size:100%;font-color:brown;">동일한 추상화 수준(feat. 예시 코드)</span></b>
       </summary>
@@ -391,7 +391,7 @@ AOP는 Aspect Oriented Programming의 약자로 `관점 지향 프로그래밍`�
     by 로버트 C 마틴
     ```
 6. 명령과 조회를 분리하라(CQS, Command Query Separation)
-    <details style="margin-top:-10px;">
+    <details>
       <summary> 
       <b><span style="font-size:100%;font-color:brown;">명령과 조회 분리(feat. 예시 코드)</span></b>
       </summary>
