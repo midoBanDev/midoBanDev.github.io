@@ -15,8 +15,8 @@ $indent-var: 1.3em !default;
 /* system typefaces 
    [modify] font 설정
 */
-$customFont: "GowunBatang-Regular";
-$serif: $customFont, Georgia, Times, serif !default;
+$customFont: "BMJUA-Regular";
+$serif: Georgia, Times, serif !default;   // $customFont 제거
 $sans-serif: $customFont, -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI",
   "Helvetica Neue", "Lucida Grande", Arial, sans-serif !default;
 $monospace: $customFont, Monaco, Consolas, "Lucida Console", monospace !default;

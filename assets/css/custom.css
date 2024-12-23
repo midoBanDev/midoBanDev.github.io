@@ -1,0 +1,9 @@
+/* 목록 전체의 기본 들여쓰기 줄이기 */
+ul {
+    list-style-position: inside; /* 점(marker)을 텍스트 안쪽으로 이동 */
+    padding-left: 10px; /* 기본 왼쪽 패딩 제거 */
+  }
+
+  .highlight {
+    margin-top: 10px; /* 위쪽 여백 20px */
+  }
