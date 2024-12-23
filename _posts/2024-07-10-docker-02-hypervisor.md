@@ -10,6 +10,11 @@ toc: true
 toc_sticky: true
 ---
 
+<br>
+
+**본 내용은 인프런의 데브위키님 강의 "[개발자를 위한 쉬운 도커](https://www.inflearn.com/course/%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A5%BC-%EC%9C%84%ED%95%9C-%EC%89%AC%EC%9A%B4-%EB%8F%84%EC%BB%A4)" 내용을 바탕으로 정리한 내용입니다.**
+
+<br>
 
 ## 가상화 기술
 - Docker를 사용하기 전 우선 가상화 기술에 대해 알아보자.

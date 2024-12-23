@@ -10,17 +10,24 @@ toc: true
 toc_sticky: true
 ---
 
+<br>
+
+**본 내용은 인프런의 데브위키님 강의 "[개발자를 위한 쉬운 도커](https://www.inflearn.com/course/%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A5%BC-%EC%9C%84%ED%95%9C-%EC%89%AC%EC%9A%B4-%EB%8F%84%EC%BB%A4)" 내용을 바탕으로 정리한 내용입니다.**
+
+<br>
+
 ## docker 관련 alias 설정
+- `docker` 키워드만으로 명령어를 실행시키기 위해 .bashrc 파일에 `winpty docker` alias를 설정한다.
 ```bash
 $ echo "alias docker='winpty docker'" >> ~/.bashrc
 ```
 
-## alias 적용
+<br>
+
+- `.bashrc` 파일을 실행시켜 설정한 alias를 적용한다.
 ```bash
 $ source ~/.bashrc
-
 또는
-
 터미널 창 껐다 다시 켜기
 ```
 
@@ -32,14 +39,14 @@ $ source ~/.bashrc
 
 # help 옵션 사용
 
-## docker
+## docker 옵션 도움말말
 ```bash
 $ docker --help
 ```
 
 <br>
 
-## container
+## container 옵션 도움말
 ```bash
 $ docker container --help
 ```
@@ -47,7 +54,7 @@ $ docker container --help
 <br>
 
 ## container run
-- container 명령어 생략 가능
+container 명령어 생략 가능
 
 ```bash
 $ docker container run --help
@@ -60,17 +67,15 @@ $ docker container run --help
 <div style="padding-top:100px;"></div>
 
 # 이미지(Image)
-- 컨테이너를 실행하기 위한 프로그램이 들어있는 압축파일
+컨테이너를 실행하기 위한 프로그램이 들어있는 압축파일
+
 ```
 Usage:  docker image COMMAND
 ```
 
-<br>
-
-## 이미지 옵션
 <details>
 <summary> 
-<b><span>옵션</span></b>
+<b><span>이미지 옵션</span></b>
 </summary>
 
 <div markdown="1">
@@ -106,9 +111,9 @@ Usage:  docker image COMMAND
 ```
 레지스트리주소/프로젝트명/이미지명:이미지태그
 ```
-- `레지스트리주소`를 생략할 경우 default로 `docker.io` 주소가 셋팅된다.
-- `프로젝트명`을 생략할 경우 default로 `library` 가 셋팅된다.
-- `이미지태그`를 생략할 경우 default로 `latest`가 셋팅된다.
+`레지스트리주소`를 생략할 경우 default로 `docker.io` 주소가 셋팅된다.  
+`프로젝트명`을 생략할 경우 default로 `library` 가 셋팅된다.  
+`이미지태그`를 생략할 경우 default로 `latest`가 셋팅된다.  
 
 
 ```bash
@@ -135,7 +140,6 @@ $ docker COMMAND docker.io/myproject/nginx:latest
 
 ## 로컬 레지스트리로 이미지 다운로드
 - `pull` 명령어 사용
-
 ```bash
 $ docker pull (이미지명)
 ```
@@ -144,7 +148,6 @@ $ docker pull (이미지명)
 
 ## 로컬 레지스트리의 새로운 이미지명 추가
 - `tag` 명령어 사용
-
 ```bash
 $ docker tag (기존이미지명) (추가할이미지명)
 ```
@@ -153,7 +156,6 @@ $ docker tag (기존이미지명) (추가할이미지명)
 
 ## 레지스트리에 이미지 업로드
 - `push` 명령어 사용
-
 ```bash
 $ docker push (이미지명)
 ```
@@ -162,7 +164,6 @@ $ docker push (이미지명)
 
 ## 이미지 목록 확인
 - `image` 명령어, `ls` 명령어 사용
-
 ```bash
 $ docker image ls
 ```
@@ -171,7 +172,6 @@ $ docker image ls
 
 ## 이미지 삭제
 - `image` 명령어, `rm` 명령어 사용
-
 ```bash
 $ docker image rm (이미지명)
 ```
@@ -180,7 +180,6 @@ $ docker image rm (이미지명)
 
 ## 이미지 히스토리 확인
 - `image` 명령어(생략가능), `history` 명령어 사용
-
 ```bash
 $ docker [image] history (이미지명)
 ```
@@ -189,7 +188,6 @@ $ docker [image] history (이미지명)
 
 ## 이미지 세부정보(메타데이터) 확인
 - `image` 명령어(생략가능), `inspect` 명령어 사용
-
 ```bash
 $ docker [image] inspect (이미지명)
 ```
@@ -198,7 +196,6 @@ $ docker [image] inspect (이미지명)
 
 ## 실행 중인 Docker Container를 이미지로 생성하기
 - `commit` 명령어, `m` 옵션 사용
-
 ```bash
 $ docker commit -m "(커밋내용)" (실행중인컨테이너명) (생성할이미지명)
 ```
@@ -230,7 +227,6 @@ $ docker commit -m "(커밋내용)" (실행중인컨테이너명) (생성할이�
 
 ## 실행 중인 Docker Container의 세부정보(메타데이터) 확인
 - `container` 명령어(생략가능), `inspect` 명령어 사용
-
 ```bash
 $ docker [container] inspect (컨테이너명/ID)
 ```
@@ -238,7 +234,6 @@ $ docker [container] inspect (컨테이너명/ID)
 
 ## 실행 중인 Docker Container 확인
 - `ps` 명령어 사용
-
 ```bash
 $ docker ps
 ```
@@ -247,7 +242,6 @@ $ docker ps
 
 ## 모든 Docker Container 확인
 - `ps` 명령어, `a` 옵션 사용
-
 ```bash
 $ docker ps -a
 ```
@@ -256,7 +250,6 @@ $ docker ps -a
 
 ## 중지된 Docker Container 삭제
 - `rm` 명령어 사용
-
 ```bash
 $ docker rm (컨테이너명/ID)
 ```
@@ -265,7 +258,6 @@ $ docker rm (컨테이너명/ID)
 
 ## 실행 중인 Docker Container 삭제
 - `rm` 명령어, `f` 옵션 사용
-
 ```bash
 $ docker rm -f (컨테이너명/ID)
 ```
@@ -325,7 +317,6 @@ Buildx를 사용하면 동일한 Dockerfile로 여러 아키텍처나 운영 체
 
 # Doker run
 - [] 괄호는 생략 가능
-
 ```bash
 Usage : docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 ```
@@ -353,7 +344,6 @@ Usage : docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 - `run` 명령어, `p` 옵션, `name` 옵션 사용
 - `p` : 포트포워딩 옵션, {Host의포트}:{컨테이너의포트}
 - `name` : 생략하면 임의의 값으로 설정됨
-
 ```bash
 $ docker run -p 80:80 --name (원하는컨테이너명) (이미지명)
 ```
@@ -362,7 +352,6 @@ $ docker run -p 80:80 --name (원하는컨테이너명) (이미지명)
 
 ## Docker Container 백그라운드에서 실행
 - `d` 옵션 사용
-
 ```bash
 $ docker run -d -p 8081:80 --name (원하는컨테이너명) (이미지명)
 ```
@@ -372,7 +361,6 @@ $ docker run -d -p 8081:80 --name (원하는컨테이너명) (이미지명)
 ## 실행 할 Docker Container의 CMS 명령어 덮어쓰기
 - 실행할 이미지의 기존 CMD 명령어는 이미지의 메타데이터를 확인하는 `inspect` 명령어로 확인 가능하다.
 - 실행할 `Image명` 뒤에 추가해 주면 된다.
-
 ```bash
 $ docker run -d -p 8081:80 --name (원하는컨테이너명) (이미지명) (COMMAND)
 ```
@@ -382,10 +370,8 @@ $ docker run -d -p 8081:80 --name (원하는컨테이너명) (이미지명) (COM
 ## Docker Container 실행 시 network 지정
 - `--network` 를 지정하지 않는 경우 `default bridge network`가 적용된다.
 - `run` 명령어, `d` 옵션, `network` 옵션, `name` 옵션 사용
-
 ```bash
 $ docker run -d --network (네트워크명) --name (원하는컨테이너명) (이미지명)
-
 # Ex
 $ docker run -d --network second-bridge --name ubuntuC devwikirepo/pingbuntu
 ```
@@ -395,7 +381,6 @@ $ docker run -d --network second-bridge --name ubuntuC devwikirepo/pingbuntu
 ## Docker Container 실행 후 바로 실행 한 컨테이너 터미널에 접속하기
 - Container에 바로 접속한 다음 해당 터미널에서 `exit`로 빠져나오게 되면 Container는 중지 된다.
 - `it` 옵션 사용. `p` 옵션 사용. 
-
 ```bash
 $ docker run -it -p 8090:80 --name (원하는컨테이너명) (이미지명)
 ```
@@ -404,26 +389,41 @@ $ docker run -it -p 8090:80 --name (원하는컨테이너명) (이미지명)
 
 ## 실행 중인 Docker Container 터미널에 접속하기
 - `exec` 명령어, `it` 옵션 사용
-
 ```bash
 $ docker exec -it (컨테이너명/ID) /bin/bash
 ```
 
 <br>
 
-## Docker Container 중지
-- `stop` 명령어 사용
-
+## Docker Container 일시 정지
+- `pause` 명령어 사용
 ```bash
-$ docker stop (컨테이너명/ID)
+$ docker pause (컨테이너명/ID)
+```
+
+<br>
+
+## Docker Container 일시 정지 재시작
+- `unpause` 명령어 사용
+```bash
+$ docker unpause (컨테이너명/ID)
+```
+
+<br>
+
+## Docker Container 종료
+- `stop` 명령어 사용
+- 기본 10초 대기 후 종료 된다.
+- `--time=20` 옵션으로 대기 시간을 변경할 수 있다.
+```bash
+$ docker stop (컨테이너명/ID) 
+$ docker stop --time=20 (컨테이너명/ID)
 ```
 
 <br>
 
 ## 중지된 Docker Container 실행
 - `start` 명령어 사용
-
-
 ```bash
 $ docker start (컨테이너명/ID)
 ```
@@ -432,7 +432,7 @@ $ docker start (컨테이너명/ID)
 
 ## 실행 중인 Docker Container 재시작 하기
 - `restart` 명령어 사용
-
+- 기본 10초 대기 후 프로세스가 재시작 된다.
 ```bash
 $ docker restart (컨테이너명/ID)
 ```
@@ -440,8 +440,9 @@ $ docker restart (컨테이너명/ID)
 <br>
 
 ## 실행 중인 Docker Container 로그 확인
-- `logs` 명령어, `f` 옵션 사용
-
+- `logs` 명령어
+- `-f` 옵션 : 실시간 로그 확인
+- `-f` 옵션 없으면 명령어 시점까지의 로그 출력.
 ```bash
 $ docker logs -f (컨테이너명/ID)
 ```
@@ -450,7 +451,6 @@ $ docker logs -f (컨테이너명/ID)
 
 ## Container와 호스트 머신 간 파일 복사
 - `cp` 명령어 사용
-
 ```bash
 $ docker cp (원본위치) (복사위치)
 ```
@@ -459,7 +459,6 @@ $ docker cp (원본위치) (복사위치)
 
 ## Container에서 호스트 머신으로 파일 복사
 - `cp` 명령어 사용
-
 ```bash
 $ docker cp (컨테이너명:원본위치) (복사위치)
 ```
@@ -468,7 +467,6 @@ $ docker cp (컨테이너명:원본위치) (복사위치)
 
 ## 호스트 머신에서 Container로 파일 복사
 - `cp` 명령어 사용
-
 ```bash
 $ docker cp (원복위치) (컨테이너명:복사위치)
 ```
@@ -496,7 +494,6 @@ $ docker network ls
 
 ## 네트워크 상세 정보 조회
 - `network` 명령어(생략가능), `inspect` 명령어 사용
-
 ```bash
 $ docker [network] inspect (네트워크명)
 ```
@@ -505,7 +502,6 @@ $ docker [network] inspect (네트워크명)
 
 ## 네트워크 생성
 - `network` 명령어, `create` 명령어 사용
-
 ```bash
 $ docker network create (원하는네트워크명)
 ```
@@ -517,10 +513,8 @@ $ docker network create (원하는네트워크명)
 - `subnet` : 해당 네트워크에서 생서되는 컨테이너들이 할당받는 IP의 범위
 - `gateway` : 브릿지의 IP 주소
 - `driver` 명령어, `subnet` 명령어, `gateway` 명령어 사용
-
 ```bash
 $ docker network create --driver (드라이버종류) --subnet (subnet IP) --gateway (gateway IP) (원하는네트워크명)
-
 # Ex.
 $ docker network create --driver bridge --subnet 10.0.0.0/24 --gateway 10.0.0.1 second-bridge
 ```
@@ -529,7 +523,6 @@ $ docker network create --driver bridge --subnet 10.0.0.0/24 --gateway 10.0.0.1 
 
 ## 네트워크 삭제
 - `network` 명령어, `rm` 명령어 사용
-
 ```bash
 $ docker network rm (네트워크명)
 ```
@@ -560,7 +553,6 @@ root@3b7914e19a2a:/# cat /etc/resolv.conf
 
 ## Volume 리스트 조회
 - `volume` 명령어 사용
-
 ```bash
 $ docker volume ls
 ```
@@ -569,7 +561,6 @@ $ docker volume ls
 
 ## Volume 상세 정보 조회
 - `volume` 명령어, `rm` 명령어 사용
-
 ```bash
 $ docker [volume] inspect (볼륨명)
 ```
@@ -578,7 +569,6 @@ $ docker [volume] inspect (볼륨명)
 
 ## Volume 생성
 - `volume` 명령어, `create` 명령어 사용
-
 ```bash
 $ docker volume create (볼륨명)
 ```
@@ -587,7 +577,6 @@ $ docker volume create (볼륨명)
 
 ## Volume 삭제
 - `volume` 명령어, `rm` 명령어 사용
-
 ```bash
 $ docker volume rm (볼륨명)
 ```
@@ -597,10 +586,8 @@ $ docker volume rm (볼륨명)
 ## Volume Mount
 - 아래 예제는 `mydata` 라는 volume을 생성한 상황이다.
 - `v` 옵션 사용. {볼륨명}:{컨테이너 내부 경로}
-
 ```bash
 $ docker run -d --name (원하는컨테이너명) -v (불륨명):(컨테이너내부경로) (이미지명)
-
 # Ex.
 $ docker run -d --name my-postgres-2 -v mydata://var/lib/postgresql/data postgres:13
 ```
@@ -609,10 +596,8 @@ $ docker run -d --name my-postgres-2 -v mydata://var/lib/postgresql/data postgre
 
 ## Bind Mount
 - `v` 옵션 사용
-
 ```bash
 $ docker run -d --name (원하는컨테이너명) -v (HostOS의경로):(컨테이너내부경로) (이미지명)
-
 # Ex.
 $ docker run -d --name my-nginx-b -v C:\Users\crizen\Desktop\index:/usr/share/nginx/html nginx
 ```
@@ -621,7 +606,6 @@ $ docker run -d --name my-nginx-b -v C:\Users\crizen\Desktop\index:/usr/share/ng
 
 ## Mount 상세 정보 확인
 - `v` 옵션 사용
-
 ```bash
 $ docker container inspect (컨테이너명)
 ```
