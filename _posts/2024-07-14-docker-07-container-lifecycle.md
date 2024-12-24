@@ -4,7 +4,7 @@ title:  "컨테이너 라이프사이클"
 categories:
   - Docker
 tags:
-  - [Docker, Container]
+  - [Docker, Container, Container-lifecycle]
 
 toc: true
 toc_sticky: true
@@ -126,8 +126,6 @@ $ docker logs -f hundredcounter
 $ docker rm -f hundredcounter
 ```
 
-  <img src="" width="80%" height="80%"/>
-
 <div style="padding-top:100px;"></div>
 <span style="margin-left:35%;">⊙</span>
 <span style="margin-left:10%">⊙</span>
@@ -143,15 +141,11 @@ $ docker rm -f hundredcounter
 - 이미지를 컨테이너로 실행하는 순간부터 CPU와 메모리를 사용하게 된다.
 - 정리하자면 이미지를 컨테이너로 실행시키는 것은 이미지에 저장되어 있는 모든 요소들을 격리된 공간(컨테이너)으로 만든 다음에 격리된 공간 안에서 프로그램을 프로세스로 실행시키는 단계를 거치는 것이다.
 
-  <img src="" width="80%" height="80%"/>
-
 <br>
 
 ## 이미지(image) 조회: `docker image ls (이미지명)`
 로컬 전체 이미지 조회: `docker image ls`  
 로컬 특정 이미지 조회: `docker image ls (이미지명)`
-
-<img src="" width="80%" height="80%"/>
 
 - REPOSITORY : 이미지의 이름
 - TAG: 이미지의 버전
@@ -187,9 +181,8 @@ $ docker rm -f hundredcounter
 - 이미지의 압축 파일과 이미지의 메타데이터를 사용해서 격리된 컨테이너가 만들어진다. 
 - 그리고 이미지가 컨테이너로 실행될 때 Cmd 필드의 명령어가 실행되고, 프로세스가 실행될 때 Env 값이 사용된다.
 - 메타데이터는 컨테이너를 실행할 때 새로운 값으로 덮어쓰기 할 수 있다.
-- 컨테이너 생성 후 이미지의 메타데이터는 컨테이너 메타데이터로 복사된다.
-
-  <img src="https://github.com/user-attachments/assets/8340f0a7-955e-4d41-bd2b-6af5587e99fd" width="80%" height="80%"/>
+- 컨테이너 생성 후 이미지의 메타데이터는 `컨테이너 메타데이터`로 복사된다.
+<img src="https://github.com/user-attachments/assets/8340f0a7-955e-4d41-bd2b-6af5587e99fd" width="80%" height="80%"/>
 
 <br>
 
@@ -197,16 +190,16 @@ $ docker rm -f hundredcounter
 - 이미지 세부 정보 조회 : `docker image inspect 이미지명`
 - 컨테이너 세부 정보 조회 : `docker container inspect 컨테이너명`
 
-  ```bash
-  1. nginx 이미지의 메타데이터 확인
-  $ docker image inspect nginx  
+```bash
+1. nginx 이미지의 메타데이터 확인
+$ docker image inspect nginx  
 
-  2. 설정 변경사항 없이 컨테이너 실행
-  $ docker run -d --name defaultCmd nginx  
+2. 설정 변경사항 없이 컨테이너 실행
+$ docker run -d --name defaultCmd nginx  
 
-  3. 실행된 컨테이너의 메타데이터 확인
-  $ docker container inspect defaultCmd
-  ```  
+3. 실행된 컨테이너의 메타데이터 확인
+$ docker container inspect defaultCmd
+```  
 
 <br>
 
