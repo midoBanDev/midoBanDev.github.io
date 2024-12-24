@@ -1,0 +1,44 @@
+
+  .code-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 4px;
+    background: #405c53;
+    border: 1px solid #e9ecef;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0; /* 상단 모서리 */
+  }
+  
+  .copy-button {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 13px;
+    color: white;
+    cursor: pointer;
+    background-color: #555; 
+    border: 1px solid #444;
+    border-radius: 4px;
+  }
+
+  .copy-button:hover {
+    background-color: #666;
+  }
+
+  .copy-button:active {
+    background-color: #444;
+  }
+  
+  /* 코드 블록 자체의 스타일 개선 */
+  pre {
+    margin-top: 0 !important; /* header와의 간격 제거 */
+    background: #282c34 !important; /* VS Code 다크 테마와 비슷한 배경색 */
+    border-radius: 0 0 16px 16px !important; /* 하단 모서리 */
+    padding: 1em !important;
+  }
+  
+  pre code {
+    color: #abb2bf !important; /* 밝은 회색으로 가독성 개선 */
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    font-family: 'Menlo', 'Monaco', 'Courier New', monospace !important;
+  }

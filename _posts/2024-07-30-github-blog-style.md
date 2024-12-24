@@ -98,6 +98,7 @@ $monospace: $customFont, Monaco, Consolas, "Lucida Console", monospace !default;
 ## 코드블록, 카테고리, 태그 스타일 설정 - `_page.scss`
 
 - `:not(pre) > code`는 `코드블록` ← 이 부분의 스타일을 수정하는 부분이다.
+
 ```css
 /* [modify] code block css 설정 */
   :not(pre) > code {
@@ -157,6 +158,31 @@ $monospace: $customFont, Monaco, Consolas, "Lucida Console", monospace !default;
   background-color: #20babb94;
 }
 ```
+
+<div style="padding-top:100px;"></div>
+<span style="margin-left:35%;">⊙</span>
+<span style="margin-left:10%">⊙</span>
+<span style="margin-left:10%">⊙</span>
+<div style="padding-top:100px;"></div>
+
+## 이미지(img) 태그 설정 - `_reset.scss`
+
+```css
+/* img border in anchor's and image quality */
+
+img {
+  /* Responsive images (ensure images don't scale beyond their parents) */
+  max-width: 100%; /* part 1: Set a maximum relative to the parent*/
+  width: auto\9; /* IE7-8 need help adjusting responsive images*/
+  height: auto; /* part 2: Scale the height according to the width, otherwise you get stretching*/
+  margin-top: 10px;
+
+  vertical-align: middle;
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+}
+```
+
 
 <!--<img src="" width="80%" height="80%"/>-->
 
