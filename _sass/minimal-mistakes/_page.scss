@@ -143,9 +143,9 @@ body {
   :not(pre) > code {
     font-weight: bold;
     font-size: 94%;
-    //padding-left: 0.1rem;
-    //padding-right: 0.1rem;
-    //padding-bottom: 0.1rem;
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+    padding-bottom: 0.1rem;
     background: #b5621a85; // 녹색 - #32929285, 갈색 - #b5621a85
     border-radius: $border-radius;
 

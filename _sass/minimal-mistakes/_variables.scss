@@ -19,7 +19,7 @@ $customFont: "BMJUA-Regular";
 $serif: Georgia, Times, serif !default;   // $customFont 제거
 $sans-serif: $customFont, -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI",
   "Helvetica Neue", "Lucida Grande", Arial, sans-serif !default;
-$monospace: $customFont, Monaco, Consolas, "Lucida Console", monospace !default;
+$monospace: $sans-serif, Monaco, Consolas, "Lucida Console", monospace !default;
 
 /* sans serif typefaces */
 $sans-serif-narrow: $sans-serif !default;
