@@ -471,6 +471,42 @@ $ docker cp (컨테이너명:원본위치) (복사위치)
 $ docker cp (원복위치) (컨테이너명:복사위치)
 ```
 
+<br>
+
+## CMD 지정하는 방법 - JSON 배열 형식 권장
+### 1. Dockerfile 내에서 지정하기
+한 Dockerfile에는 하나의 CMD만 가능하다.  
+중복되는 경우 마지마기 CMD만 적용된다.
+```dockerfile
+# 셸 형식
+CMD nginx -g daemon off;
+
+# JSON 배열 형식 (실행 형식) - 권장
+CMD ["nginx", "-g", "daemon off;"]
+
+# 셸과 함께 사용
+CMD ["/bin/sh", "-c", "nginx -g 'daemon off;'"]
+```
+
+### 2. docker commit 명령 사용 시
+```bash
+# JSON 배열 형식
+docker commit -c 'CMD ["nginx", "-g", "daemon off;"]' 컨테이너명 이미지명
+
+# 셸 형식
+docker commit -c 'CMD nginx -g "daemon off;"' 컨테이너명 이미지명
+```
+
+### 3. docker run 명령 사용 시
+```bash
+# CMD 덮어쓰기 (마지막에 명령어 직접 지정)
+docker run 이미지명 nginx -g "daemon off;"
+
+# JSON 형식의 명령어 덮어쓰기
+docker run 이미지명 nginx -g daemon off;
+```
+
+
 <div style="padding-top:100px;"></div>
 <span style="margin-left:35%;">⊙</span>
 <span style="margin-left:10%">⊙</span>
