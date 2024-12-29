@@ -37,6 +37,40 @@ toc_sticky: true
 <span style="margin-left:10%">⊙</span>
 <div style="padding-top:100px;"></div>
 
+## 이미지의 기본 파일 시스템 
+도커는 리눅스 기반으로 동작하기 때문에 기본적으로 제공되는 이미지는 리눅스의 파일 시스템 구조를 가진다.  
+가장 일반적인 OS는 아래와 같다.
+```
+ubuntu:20.04
+debian:slim
+alpine:3.**14**
+```
+소프트웨어가 설치되고 사용되기 위해서는 OS가 필요하다.
+그래서 이미지는 리눅스 OS를 설치하고 그 위에 소프트웨어가 설치된 시점의 스냅샷으로 만들어진다.
+그래서 우리가 사용하는 소프트웨어 이미지들을 컨테이너로 실행하여 바로 사용할 수 있는 것이다.
+
+jdk 이미지를 컨테이너로 실행하고 컨테이너 내부에 접속하면 아래와 같은 기본 파일 시스템 디렉터리 구조를 확인할 수 있다.
+<img src="https://github.com/user-attachments/assets/fd52803f-e7d7-4dde-b393-36dd225eaa05" width="80%" height="80%"/>
+
+하지만 한 가지 고려해야할 점이 있다. 
+JDK 이미지는 기본적으로 실행할 명령어가 없다. 그런데 컨테이너는 실행할 프로세스가 없으면 자동으로 종료 버린다.
+이렇게 실행할 명령어가 없는 이미지로 컨테이너를 실행해야 하는 경우 아래 명령어로 실행 가능하다. 
+```bash
+# 1. 대화형 셸로 실행 : 컨테이너 실행하면서 바로 접속
+docker run -it --name jdk-container openjdk:11-jre-slim bash
+
+# 2. sleep 명령어로 계속 실행 상태 유지
+docker run -d --name jdk-container openjdk:11-jre-slim sleep infinity
+```
+
+
+
+<div style="padding-top:100px;"></div>
+<span style="margin-left:35%;">⊙</span>
+<span style="margin-left:10%">⊙</span>
+<span style="margin-left:10%">⊙</span>
+<div style="padding-top:100px;"></div>
+
 ## 이미지와 컨테이너의 관계
 - 프로그램은 실행되기 전 디스크 공간만 차지하는 형태로 존재한다. OS를 통해 자원을 할당 받고 실행이 되면 프로세스가 된다.
 - 이미지와 컨테이너의 관계는 프로그램과 프로세스의 관계와 동일하게 이해하면 된다.
