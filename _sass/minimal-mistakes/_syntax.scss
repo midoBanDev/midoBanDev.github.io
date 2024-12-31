@@ -327,6 +327,7 @@ figure.highlight {
 
 /* 코드 블록 언어 표시 */
 div.highlighter-rouge {
+  &.language-javascript::before { content: "Plaintext"; }
   &.language-javascript::before { content: "Javascript"; }
   &.language-js::before { content: "Js"; }
   &.language-python::before { content: "Python"; }

@@ -1,9 +1,35 @@
-/* 목록 전체의 기본 들여쓰기 줄이기 */
-ul {
-    list-style-position: inside; /* 점(marker)을 텍스트 안쪽으로 이동 */
-    padding-left: 10px; /* 기본 왼쪽 패딩 제거 */
+  /* 목록 전체의 기본 들여쓰기 줄이기 */
+  ul {
+    /*list-style-position: inside;  점(marker)을 텍스트 안쪽으로 이동 */
+    padding-left: 30px; /* 기본 왼쪽 패딩 제거 */
+    margin-top: -5px;
   }
 
-  .highlight {
-    margin-top: 10px; /* 위쪽 여백 20px */
+  details {
+    margin: 10px 0;
   }
+
+  details > summary {
+      cursor: pointer;
+      padding: 8px;
+  }
+
+  details > div {
+      border: 2px solid #ddd;
+      border-radius: 4px;
+      padding: 16px;
+      margin-top: 10px;
+      background-color: #f8f9fa;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  /* 기본 행간 설정 */
+  p {
+      line-height: 1.5;  /* 기본 행간 */
+  }
+
+  /* br 태그 다음에 오는 내용의 간격 조절 
+  br {
+      content: "";
+      line-height: 5px;
+  }*/

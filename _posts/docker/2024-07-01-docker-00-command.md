@@ -85,7 +85,6 @@ Usage:  docker image COMMAND
 <div markdown="1">
 
 - `build` : Dockerfile을 사용하여 이미지를 빌드한다.
-  - df
   ```
   Usage:  docker buildx build [OPTIONS] PATH | URL | -
   ```
@@ -302,14 +301,13 @@ $ docker build -t (이미지명) (Dockerfile경로)
 
 <div markdown="1">
 
-<br>
-
-Docker Buildx는 Docker의 공식적인 멀티플랫폼 빌드 도구이다.  
-Buildx를 사용하면 동일한 Dockerfile로 여러 아키텍처나 운영 체제에 대한 이미지를 빌드할 수 있다.  
+Docker Buildx는 Docker의 공식적인 멀티플랫폼 빌드 도구이다. 
+Buildx를 사용하면 동일한 Dockerfile로 여러 아키텍처나 운영 체제에 대한 이미지를 빌드할 수 있다. 
 이는 다양한 환경에서 동일한 애플리케이션을 실행하거나 배포할 때 유용하다.  
 
 여기서 말하는 다양한 플랫폼이란 `운영체제와 하드웨어 아키텍처`를 아우르는 말이다.
 우리가 많이 사용하는 `Window OS`가 `운영체제`이다. 또 다른 운영체제로는 `MaxOS`, `LinuxOS` 등이 있다.   
+
 이런 운영체제 안에는 하드웨어 아키텍처가 존재하며, 이는 `CPU`의 구조를 의미한다.  
 하드웨어 아키텍처(CPU)의 종류에는 다음과 같은 것들이 있다.   
 - Window : x86, x86_64, ARM 등

@@ -15,6 +15,7 @@ toc_sticky: true
 아래 내용은 [Dockerfile reference](https://docs.docker.com/reference/dockerfile/)를 번역한 내용이다.
 
 # FROM
+---
 
 ```dockerfile
 FROM [--platform=<platform>] <image> [AS <name>]
@@ -70,6 +71,7 @@ RUN echo $VERSION > image_version
 
 
 # WORKDIR
+---
 `임시 컨테이너 생성`, `새로운 레이어 추가`
 
 ```dockerfile
@@ -112,6 +114,7 @@ RUN pwd
 
 
 # COPY
+---
 `임시 컨테이너 생성`, `새로운 레이어 생성`
 
 
@@ -248,7 +251,7 @@ COPY <src> <dest>
 <br>
 
 **절대 경로 사용**  
-대상 경로가 슬래시(/)로 시작하면 절대 경로로 해석되며, 소스 파일은 현재 [**빌드 스테이지**](https://midobandev.github.io/docker/docker-99-docker-words/)의 루트를 기준으로 지정된 위치에 복사됩니다.
+대상 경로가 슬래시(/)로 시작하면 절대 경로로 해석되며, 소스 파일은 현재 [**빌드 스테이지**](https://midobandev.github.io/docker/docker-00-docker-words/)의 루트를 기준으로 지정된 위치에 복사됩니다.
 
 ```dockerfile
 # /abs/test.txt 파일 생성
@@ -271,7 +274,7 @@ COPY test.txt /abs/
 <br>
 
 **상대 경로 사용**  
-대상 경로가 슬래시(/)로 시작하지 않으면, [**빌드 컨테이너**](https://midobandev.github.io/docker/docker-99-docker-words/)의 작업 디렉토리(working directory)를 기준으로 한 상대 경로로 해석됩니다.
+대상 경로가 슬래시(/)로 시작하지 않으면, [**빌드 컨테이너**](https://midobandev.github.io/docker/docker-00-docker-words/)의 작업 디렉토리(working directory)를 기준으로 한 상대 경로로 해석됩니다.
 
 ```dockerfile
 WORKDIR /usr/src/app
@@ -533,6 +536,7 @@ COPY --chmod=$MODE . .
 
 
 # RUN
+---
 
 **기본 개념**  
 `RUN` 명령어는 현재 이미지 위에 새로운 레이어를 생성하기 위해 명령을 실행합니다. 
@@ -862,45 +866,149 @@ RUN --security=insecure cat /proc/self/status | grep CapEff
 <span style="margin-left:10%">⊙</span>
 <div style="padding-top:100px;"></div>
 
+# EXPOSE 
+
+## 명령어 기본 구문
+```dockerfile
+EXPOSE <포트> [<포트>/<프로토콜>...]
+```
+
+<br>
+
+## EXPOSE의 역할과 특징
+
+EXPOSE는 컨테이너가 실행 중에 특정 네트워크 포트에서 수신 대기한다는 것을 Docker에 알려주는 명령어입니다. 하지만 이 명령어에 대해 다음과 같은 중요한 특징들을 이해해야 합니다:
+
+**1. 문서화 역할**  
+- EXPOSE는 실제로 포트를 외부에 공개(publish)하지 않습니다
+- 이미지 제작자와 컨테이너 실행자 간의 일종의 문서화 역할을 합니다
+- 어떤 포트가 사용될 것인지를 명시하는 용도입니다
+
+**2. 실제 포트 공개 방법**  
+컨테이너 실행 시 포트를 실제로 공개하려면 다음 두 가지 방법을 사용할 수 있습니다:
+- `-p(소문자)` 플래그: 특정 포트를 지정하여 공개
+- `-P(대문자)` 플래그: EXPOSE로 지정된 모든 포트를 높은 번호의 포트에 자동 매핑
+
+<br>
+
+## 프로토콜 지정
+
+**TCP 프로토콜 (기본값)**  
+```dockerfile
+EXPOSE 80
+# 또는
+EXPOSE 80/tcp
+```
+
+**UDP 프로토콜**  
+```dockerfile
+EXPOSE 80/udp
+```
+
+**TCP와 UDP 동시 지정**  
+같은 포트에 대해 TCP와 UDP를 모두 사용하려면 다음과 같이 각각 지정해야 합니다:
+```dockerfile
+EXPOSE 80/tcp
+EXPOSE 80/udp
+```
+
+<br>
+
+## 실제 사용 예시
+
+**1. Dockerfile에서의 EXPOSE**  
+```dockerfile
+FROM nginx:latest
+EXPOSE 80/tcp
+EXPOSE 443/tcp
+```
+
+**2. 컨테이너 실행 시 포트 매핑**  
+```bash
+# EXPOSE된 모든 포트를 자동으로 매핑
+docker run -P nginx
+
+# 특정 포트를 수동으로 매핑
+docker run -p 8080:80 nginx
+
+# TCP와 UDP 포트 모두 매핑
+docker run -p 80:80/tcp -p 80:80/udp nginx
+```
+
+<br>
+
+## 주의사항
+
+1. `-P` 플래그 사용 시:
+   - 호스트의 임시 포트(ephemeral port)가 사용됩니다
+   - TCP와 UDP는 서로 다른 호스트 포트에 매핑됩니다
+
+    <details>
+    <summary> 
+    <b><span>대문자 -P 옵션 설명</span></b>
+    </summary>
+
+    <div markdown="1">
+
+    docker run -P (대문자 P)를 사용하면, Dockerfile의 EXPOSE로 지정된 포트를 호스트의 임시 포트(ephemeral port)에 자동으로 매핑합니다.  
+    작동 방식을 예시로 설명하면:
+    ```dockerfile
+    # Dockerfile
+    EXPOSE 80
+    EXPOSE 443
+    ```
+    이렇게 설정된 이미지를 -P 옵션으로 실행할 경우:
+    ```bash
+    $ docker run -P nginx
+    ```
+    Docker는 시스템의 임시 포트 범위(일반적으로 32768-65535)에서 사용 가능한 포트를 자동으로 할당합니다.  
+    실제 할당된 포트는 다음 명령어로 확인할 수 있습니다:
+    ```bash
+    $ docker ps
+    ```
+
+    출력 예시:
+    ```
+    CONTAINER ID   IMAGE   ...   PORTS
+    abc123def456   nginx   ...   0.0.0.0:32768->80/tcp, 0.0.0.0:32769->443/tcp
+    ```
+    이 경우:
+
+    - 컨테이너의 80포트는 호스트의 32768포트로 매핑
+    - 컨테이너의 443포트는 호스트의 32769포트로 매핑
+
+    따라서:
+
+    - http://localhost:32768로 80포트 접근 가능
+    - https://localhost:32769로 443포트 접근 가능
+
+    이 방식의 장단점:
+
+    - 장점: 포트 충돌 걱정 없이 여러 컨테이너 실행 가능
+    - 단점: 매번 다른 포트가 할당되어 예측하기 어려움
+
+    그래서 보통 개발 환경에서는 -p 옵션으로 명시적인 포트 매핑을 선호합니다.
+    </div>
+    </details>
 
 
-<div style="padding-top:100px;"></div>
-<span style="margin-left:35%;">⊙</span>
-<span style="margin-left:10%">⊙</span>
-<span style="margin-left:10%">⊙</span>
-<div style="padding-top:100px;"></div>
+2. 런타임 오버라이드:
+   - Dockerfile의 EXPOSE 설정과 관계없이 `docker run` 시 `-p` 플래그로 다른 포트 매핑이 가능합니다
 
+<br>
 
+## 네트워크 통신 대안
 
+Docker 네트워크를 사용하면 EXPOSE나 포트 공개 없이도 컨테이너 간 통신이 가능합니다:
+```bash
+# 네트워크 생성
+docker network create mynetwork
 
-<div style="padding-top:100px;"></div>
-<span style="margin-left:35%;">⊙</span>
-<span style="margin-left:10%">⊙</span>
-<span style="margin-left:10%">⊙</span>
-<div style="padding-top:100px;"></div>
+# 컨테이너를 네트워크에 연결
+docker run --network mynetwork myapp
+```
 
-
-
-
-<div style="padding-top:100px;"></div>
-<span style="margin-left:35%;">⊙</span>
-<span style="margin-left:10%">⊙</span>
-<span style="margin-left:10%">⊙</span>
-<div style="padding-top:100px;"></div>
-
-
-
-
-<div style="padding-top:100px;"></div>
-<span style="margin-left:35%;">⊙</span>
-<span style="margin-left:10%">⊙</span>
-<span style="margin-left:10%">⊙</span>
-<div style="padding-top:100px;"></div>
-
-
-
-
-
+이 경우 같은 네트워크상의 컨테이너들은 모든 포트를 통해 서로 통신할 수 있습니다.
 
 <div style="padding-top:100px;"></div>
 <span style="margin-left:35%;">⊙</span>
