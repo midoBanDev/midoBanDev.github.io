@@ -327,8 +327,9 @@ figure.highlight {
 
 /* 코드 블록 언어 표시 */
 div.highlighter-rouge {
-  &.language-javascript::before { content: "Plaintext"; }
+  &.language-plaintext::before { content: "Plaintext"; }
   &.language-javascript::before { content: "Javascript"; }
+  &.language-groovy::before { content: "Groovy"; }
   &.language-js::before { content: "Js"; }
   &.language-python::before { content: "Python"; }
   &.language-py::before { content: "Py"; }
@@ -340,6 +341,7 @@ div.highlighter-rouge {
   &.language-bash::before { content: "Bash"; }
   &.language-ruby::before { content: "Ruby"; }
   &.language-yaml::before { content: "Yaml"; }
+  &.language-properties::before { content: "Properties"; }
   &.language-xml::before { content: "Xml"; }
   &.language-sql::before { content: "Sql"; }
   &.language-php::before { content: "Php"; }

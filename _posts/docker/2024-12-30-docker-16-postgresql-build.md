@@ -82,7 +82,7 @@ postgres-infra/
 **1. 환경별 다른 Dockerfile 사용**
 
 ```dockerfile
-bashCopyDockerfile.dev
+Dockerfile.dev
 Dockerfile.prod
 ```
 <br>
@@ -351,6 +351,38 @@ COPY ./init/03-data.sql /docker-entrypoint-initdb.d/
 
 <br>
 
+#### 2.3 스크립트 수동으로 실행
+- `cp` 명령어로 컨테이너 외부에서 컨테이너 내부로 파일 복사할 수 있다.
+- 나는 윈도우 환경에서 `gitbash`를 사용하는 경우 `<컨테이너명>:` 뒤에 `/` 슬래시를 붙이면 컨테이너명을 찾지 못한다는 에러가 나왔다.
+- 명령어 자체를 잘못 인식하는 것 같다. 하지만 다른 환경에서는 정상 작동할 수 있다.
+- 원인으로는 이렇단다.
+>Git Bash가 POSIX 스타일 경로를 Windows 경로로 자동 변환하려고 시도한다. 슬래시를 제거함으로써 이러한 자동 변환을 피할 수 있다.
+
+- 슬러시 없이 루트 경로부터 작성해주면 되었다.
+```bash
+# docker cp <빌드컨텍스트파일> <container_id>:<컨테이너내부파일>
+$ docker cp ./new_script.sql my-container:tmp/new_script.sql
+```
+
+- 컨테이너 외부에서 파일 실행
+```bash
+# docker exec -it <컨테이너명/ID> psql -U <DB유저명> -d <DB명> -f <경로포함파일>
+$ docker exec -it my-container psql -U myuser -d mydb -f /tmp/new_script.sql
+```
+
+- 컨테이너 내부에서 파일 실행
+```bash
+# 컨테이너 접속
+$ docker exec -it <컨테이너명/ID> /bin/bash
+--
+# 원하는 파일 실행
+# psql -U <DB유저명> -d <DB명> -f /파일경로/파일
+$ psql -U myuser -d mydb -f /docker-entrypoint-initdb.d/init.sql
+```
+
+
+<br>
+
 ### 3. PostgreSQL 설정
 #### 3.1 postgresql.conf 설정
 ```dockerfile
@@ -488,10 +520,22 @@ WAL은 데이터베이스의 복구와 복제에 중요한 역할을 합니다:
 호스트 파일을 `cp` 명령어를 통해 컨테이너 내부로 복사할 수 있다. 
 또한 컨테이너 내부 파일을 호스트로 복사할 수 있다.
 
+- 나는 윈도우 환경에서 `gitbash`를 사용하는 경우 `<컨테이너명>:` 뒤에 `/` 슬래시를 붙이면 컨테이너명을 찾지 못한다는 에러가 나왔다.
+- 명령어 자체를 잘못 인식하는 것 같다. 하지만 **다른 환경에서는 슬러시가 있어야 정상 작동할 수 있다.**
+- 원인으로는 이렇단다.
+>Git Bash가 POSIX 스타일 경로를 Windows 경로로 자동 변환하려고 시도한다. 슬래시를 제거함으로써 이러한 자동 변환을 피할 수 있다.
+
+- 슬러시 없이 루트 경로부터 작성해주면 되었다.
+
+
 - 호스트 -> 컨테이너: `docker cp 원본위치 컨테이너명:복사위치`
 
 ```bash
-$ docker cp ./config/postgresql.conf my-postgresql:/etc/postgresql/custom.conf
+# 현재 디렉토리 기준 복사
+$ docker cp ./config/postgresql.conf my-postgresql:etc/postgresql/custom.conf
+
+# 별도의 경로는 루트부터 경로 지정
+$ docker cp loan-api:app/loan-manager-api.jar /C/Users/wglee/Downloads/
 ```
 
 <br>
@@ -499,7 +543,11 @@ $ docker cp ./config/postgresql.conf my-postgresql:/etc/postgresql/custom.conf
 - 컨테이너 -> 호스트: `docker cp 컨테이너명:복사위치 원본위치` 
 
 ```bash
-$ docker cp my-postgresql:/etc/postgresql/custom.conf ./config/postgresql.conf
+# 현재 디렉토리 기준으로 복사
+$ docker cp my-postgresql:etc/postgresql/custom.conf ./config/postgresql.conf
+
+# 별도의 경로는 루트부터 경로 지정
+$ docker cp loan-api:app/loan-manager-api.jar /C/Users/wglee/Downloads/
 ```
 
 <br>
@@ -587,6 +635,9 @@ CMD ["postgres", "-c", "config_file=/etc/postgresql/custom.conf", "-c", "hba_fil
 <br>
 
 ### 9. 빌드 및 실행 예시
+- `-p` 옵션을 사용하지 않으면 외부에서 접근하지 못한다. (커테이너 내부 포트는 기본 5432 설정됨)
+- 단 같은 네트워크에서는 접근이 가능하다. 
+
 ```bash
 # 이미지 빌드
 docker build -t my-postgres .

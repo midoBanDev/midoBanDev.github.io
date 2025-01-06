@@ -219,7 +219,7 @@ $ docker image prune -a
 
 ```bash
 # 모든 미사용 Docker 객체 삭제
-docker system prune
+$ docker system prune
 ```
 
 <img src="" width="80%" height="80%"/>
