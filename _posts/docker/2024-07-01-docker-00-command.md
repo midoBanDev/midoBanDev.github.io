@@ -494,15 +494,6 @@ $ docker logs -f (컨테이너명/ID)
 
 <br>
 
-## Container와 호스트 머신 간 파일 복사
-- `cp` 명령어 사용
-
-```bash
-$ docker cp (원본위치) (복사위치)
-```
-
-<br>
-
 ## Container에서 호스트 머신으로 파일 복사
 - `cp` 명령어 사용
 
@@ -517,6 +508,29 @@ $ docker cp (컨테이너명:원본위치) (복사위치)
 
 ```bash
 $ docker cp (원복위치) (컨테이너명:복사위치)
+```
+
+- 소스 경로를 지정할 때 특정 폴더 밑에 있는 `내용`만 복사하고 싶은 경우 `.` 사용하면 된다.
+
+```bash
+$ docker cp ./build/. my-nginx:usr/share/nginx/html/
+```
+
+- `.` 없으면 **build 폴더 자체**가 복사된다.
+- 아래 명령은 모두 같은 결과 -> html/build
+
+```bash
+# 모든 경로 마지막에 슬래시 추가
+$ docker cp ./build/ my-nginx:usr/share/nginx/html/
+
+# 상대 경로만 마지막에 슬래시 추가
+$ docker cp ./build my-nginx:usr/share/nginx/html/
+
+# 소스 경로만 마지막에 슬래시 추가
+$ docker cp ./build/ my-nginx:usr/share/nginx/html
+
+# 모든 경로 마지막에 슬래시 제거
+$ docker cp ./build my-nginx:usr/share/nginx/html
 ```
 
 <br>

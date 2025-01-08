@@ -10,8 +10,6 @@ toc: true
 toc_sticky: true
 ---
 
-# Gradle 태스크 실행 순서
-
 ## 1. 전체 실행 순서 (./gradlew build 실행 시)
 
 ```
