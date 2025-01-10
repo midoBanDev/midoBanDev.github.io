@@ -326,6 +326,9 @@ WORKDIR /app
 # 소스코드에서 package*.json 파일만 먼저 복사
 COPY --from=source /app/package*.json ./
 
+# 레지스트리 변경
+RUN npm config set registry https://registry.npmmirror.com
+
 # BuildKit 캐시를 사용한 의존성 설치
 # npm 캐시와 node_modules를 캐시 마운트로 관리
 # .npm과 node_modules 둘다 캐시 마운트를 사용하는 경우 오버헤드가 너무 커서 빌드 시간이 엄청 오래걸린다.

@@ -28,8 +28,22 @@
       line-height: 1.5;  /* 기본 행간 */
   }
 
-  /* br 태그 다음에 오는 내용의 간격 조절 
-  br {
-      content: "";
-      line-height: 5px;
-  }*/
+  .br10 {
+    padding-top:10px;
+  }
+
+  .br15 {
+    padding-top:15px;
+  }
+
+  .br20 {
+    padding-top:20px;
+  }
+
+  .br25 {
+    padding-top:25px;
+  }
+
+  .br30 {
+    padding-top:30px;
+  }
