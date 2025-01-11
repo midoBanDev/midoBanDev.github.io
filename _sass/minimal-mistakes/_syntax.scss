@@ -345,6 +345,7 @@ div.highlighter-rouge {
   &.language-xml::before { content: "Xml"; }
   &.language-sql::before { content: "Sql"; }
   &.language-php::before { content: "Php"; }
+  &.language-nginx::before { content: "Nginx"; }
   &.language-dockerfile::before { content: "Dockerfile"; }
   
   &::before {

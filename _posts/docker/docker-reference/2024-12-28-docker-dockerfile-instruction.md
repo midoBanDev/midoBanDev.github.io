@@ -2,7 +2,7 @@
 layout: single
 title:  "도커파일 지시어(Dockerfile Instruction)"
 categories:
-  - Docker
+  - DockerDoc
 tags:
   - [Docker, Dockerfile, Instruction]
 

@@ -119,6 +119,17 @@ RUN npm run build
 # 실행 스테이지 분리
 FROM nginx:alpine
 
+# 기본 유틸리티 설치
+# apt-get update: 패키지 목록을 최신 상태로 갱신.
+# apt-get install: 필요한 패키지를 설치.
+# rm -rf /var/lib/apt/lists/*: 패키지 설치 후 더 이상 필요 없는 캐시를 삭제.
+RUN apt-get update && apt-get install -y \
+    iputils-ping \
+    net-tools \
+    curl \
+    vim \
+    && rm -rf /var/lib/apt/lists/*
+
 # 빌드 결과물을 nginx의 서비스 디렉토리로 복사
 COPY --from=build /app/build/ /usr/share/nginx/html/
 

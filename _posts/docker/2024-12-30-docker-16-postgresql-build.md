@@ -152,6 +152,17 @@ docker run -e CONFIG_FILE=/etc/postgresql/custom.prod.conf ...
 # Base 이미지 선택
 FROM postgres:13
 
+# 기본 유틸리티 설치
+# apt-get update: 패키지 목록을 최신 상태로 갱신.
+# apt-get install: 필요한 패키지를 설치.
+# rm -rf /var/lib/apt/lists/*: 패키지 설치 후 더 이상 필요 없는 캐시를 삭제.
+RUN apt-get update && apt-get install -y \
+    iputils-ping \
+    net-tools \
+    curl \
+    vim \
+    && rm -rf /var/lib/apt/lists/*
+
 # 필수 환경 변수 설정
 ENV POSTGRES_USER=myuser
 ENV POSTGRES_PASSWORD=mypassword
@@ -163,27 +174,38 @@ ENV TZ=Asia/Seoul
 # 포트 설정
 EXPOSE 5432
 ```
+**베이스 이미지**  
 PostgreSQL의 공식 이미지를 선택할 때는 버전 선택이 중요합니다.  
 일반적으로 최신 버전(latest)보다는 특정 버전을 지정하는 것이 안정성 측면에서 좋습니다.   
 
-`POSTGRES_USER`
-- 데이터베이스 superuser 계정명 지정한다. 
-- 지정하지 않으면 기본값 'postgres' 사용자가 생성된다.
-- 이 계정은 모든 데이터베이스 관리 권한을 가진다.
+<div class="br20"/>
 
-`POSTGRES_PASSWORD`
-- superuser 계정의 비밀번호
-- 보안을 위해 반드시 설정해야 함
-- 환경 변수나 시크릿으로 관리하는 것이 좋음
+**기본 유틸리티 설치**  
+- `apt-get update`: 패키지 목록을 최신 상태로 갱신.
+- `apt-get install`: 필요한 패키지를 설치.
+- `rm -rf /var/lib/apt/lists/*`: 패키지 설치 후 더 이상 필요 없는 캐시를 삭제.
 
-`POSTGRES_DB`
-- 초기에 생성될 기본 데이터베이스 이름
-- 지정하지 않으면 POSTGRES_USER값과 동일한 이름의 DB 생성
+<div class="br20"/>
 
-`타임존 설정`
-- TZ 환경변수로 컨테이너의 시간대 설정
-- 로그 기록이나 시간 관련 작업시 중요
-- Asia/Seoul과 같이 지역 기반으로 설정
+**DB 계정 정보 설정**  
+- `POSTGRES_USER`
+  - 데이터베이스 superuser 계정명 지정한다. 
+  - 지정하지 않으면 기본값 'postgres' 사용자가 생성된다.
+  - 이 계정은 모든 데이터베이스 관리 권한을 가진다.
+
+- `POSTGRES_PASSWORD`
+  - superuser 계정의 비밀번호
+  - 보안을 위해 반드시 설정해야 함
+  - 환경 변수나 시크릿으로 관리하는 것이 좋음
+
+- `POSTGRES_DB`
+  - 초기에 생성될 기본 데이터베이스 이름
+  - 지정하지 않으면 POSTGRES_USER값과 동일한 이름의 DB 생성
+
+- `타임존 설정`
+  - TZ 환경변수로 컨테이너의 시간대 설정
+  - 로그 기록이나 시간 관련 작업시 중요
+  - Asia/Seoul과 같이 지역 기반으로 설정
 
 
 <details>
@@ -196,8 +218,8 @@ PostgreSQL의 공식 이미지를 선택할 때는 버전 선택이 중요합니
 **환경 변수 설정**  
 
 환경 변수는 컨테이너 초기화 시 매우 중요한 역할을 합니다.  
-컨테이너 실행 시 PostgreSQL을 처음 초기화할 때 `ENV`로 지정한 `POSTGRES_USER`, `POSTGRES_PASSWORD`,`POSTGRES_DB` 환경변수를 읽어서 DB와 유저를 생성합니다.
-아래 경우를 예로 postgreSQL이 어떻게 초기화 되는지 살펴봅시다.
+컨테이너 실행 시 PostgreSQL을 처음 초기화할 때 `ENV`로 지정한 `POSTGRES_USER`, `POSTGRES_PASSWORD`,`POSTGRES_DB`의 환경변수를 읽어서 DB와 유저를 생성합니다.
+이 환경 변수들이 postgreSQL의 초기화 시 어떻게 사용되는지 알아봅시다.
 
 **1. `POSTGRES_PASSWORD` 만 설정**  
 ```dockerfile
@@ -521,9 +543,7 @@ WAL은 데이터베이스의 복구와 복제에 중요한 역할을 합니다:
 또한 컨테이너 내부 파일을 호스트로 복사할 수 있다.
 
 - 나는 윈도우 환경에서 `gitbash`를 사용하는 경우 `<컨테이너명>:` 뒤에 `/` 슬래시를 붙이면 컨테이너명을 찾지 못한다는 에러가 나왔다.
-- 명령어 자체를 잘못 인식하는 것 같다. 하지만 **다른 환경에서는 슬러시가 있어야 정상 작동할 수 있다.**
-- 원인으로는 이렇단다.
->Git Bash가 POSIX 스타일 경로를 Windows 경로로 자동 변환하려고 시도한다. 슬래시를 제거함으로써 이러한 자동 변환을 피할 수 있다.
+>윈도우의 Git Bash가 POSIX 스타일 경로를 Windows 경로로 자동 변환하려고 시도한다. 슬래시를 제거하거나 슬래시를 하나 더 추가하면 이러한 자동 변환을 피할 수 있다.
 
 - 슬러시 없이 루트 경로부터 작성해주면 되었다.
 
@@ -532,10 +552,10 @@ WAL은 데이터베이스의 복구와 복제에 중요한 역할을 합니다:
 
 ```bash
 # 현재 디렉토리 기준 복사
-$ docker cp ./config/postgresql.conf my-postgresql:etc/postgresql/custom.conf
+$ docker cp ./config/postgresql.conf my-postgresql://etc/postgresql/custom.conf
 
 # 별도의 경로는 루트부터 경로 지정
-$ docker cp loan-api:app/loan-manager-api.jar /C/Users/wglee/Downloads/
+$ docker cp loan-api://app/loan-manager-api.jar /C/Users/wglee/Downloads/
 ```
 
 <br>
@@ -544,10 +564,10 @@ $ docker cp loan-api:app/loan-manager-api.jar /C/Users/wglee/Downloads/
 
 ```bash
 # 현재 디렉토리 기준으로 복사
-$ docker cp my-postgresql:etc/postgresql/custom.conf ./config/postgresql.conf
+$ docker cp my-postgresql://etc/postgresql/custom.conf ./config/postgresql.conf
 
 # 별도의 경로는 루트부터 경로 지정
-$ docker cp loan-api:app/loan-manager-api.jar /C/Users/wglee/Downloads/
+$ docker cp loan-api://app/loan-manager-api.jar /C/Users/wglee/Downloads/
 ```
 
 <br>
@@ -598,6 +618,14 @@ checkpoint_completion_target = 0.9  # 체크포인트 완료 목표
 ```dockerfile
 FROM postgres:13
 
+# 기본 유틸리티 설치
+RUN apt-get update && apt-get install -y \
+    iputils-ping \
+    net-tools \
+    curl \
+    vim \
+    && rm -rf /var/lib/apt/lists/*
+
 # 환경 변수 설정
 ENV POSTGRES_USER=myuser
 ENV POSTGRES_PASSWORD=mypassword
@@ -637,7 +665,8 @@ CMD ["postgres", "-c", "config_file=/etc/postgresql/custom.conf", "-c", "hba_fil
 ### 9. 빌드 및 실행 예시
 - `-p` 옵션을 사용하지 않으면 외부에서 접근하지 못한다. (커테이너 내부 포트는 기본 5432 설정됨)
 - 단 같은 네트워크에서는 접근이 가능하다. 
-
+- DB를 외부에서 접근하지 못하도록 하려면 `-p`(포트포워딩) 옵션 없이 사용하자.
+  
 ```bash
 # 이미지 빌드
 docker build -t my-postgres .

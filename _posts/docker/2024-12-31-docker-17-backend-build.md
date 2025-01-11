@@ -89,6 +89,17 @@ RUN gradle build --no-daemon
 # 실행 스테이지
 FROM eclipse-temurin:17-jre
 
+# 기본 유틸리티 설치
+# apt-get update: 패키지 목록을 최신 상태로 갱신.
+# apt-get install: 필요한 패키지를 설치.
+# rm -rf /var/lib/apt/lists/*: 패키지 설치 후 더 이상 필요 없는 캐시를 삭제.
+RUN apt-get update && apt-get install -y \
+    iputils-ping \
+    net-tools \
+    curl \
+    vim \
+    && rm -rf /var/lib/apt/lists/*
+
 # 애플리케이션을 실행할 작업 디렉토리를 생성
 WORKDIR /app
 

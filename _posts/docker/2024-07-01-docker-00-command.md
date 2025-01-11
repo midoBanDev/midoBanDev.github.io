@@ -505,6 +505,7 @@ $ docker cp (컨테이너명:원본위치) (복사위치)
 
 ## 호스트 머신에서 Container로 파일 복사
 - `cp` 명령어 사용
+>윈도우의 Git Bash가 POSIX 스타일 경로를 Windows 경로로 자동 변환하려고 시도한다. 슬래시를 제거하거나 슬래시를 하나 더 추가하면 이러한 자동 변환을 피할 수 있다.
 
 ```bash
 $ docker cp (원복위치) (컨테이너명:복사위치)
@@ -513,7 +514,7 @@ $ docker cp (원복위치) (컨테이너명:복사위치)
 - 소스 경로를 지정할 때 특정 폴더 밑에 있는 `내용`만 복사하고 싶은 경우 `.` 사용하면 된다.
 
 ```bash
-$ docker cp ./build/. my-nginx:usr/share/nginx/html/
+$ docker cp ./build/. my-nginx:/usr/share/nginx/html/
 ```
 
 - `.` 없으면 **build 폴더 자체**가 복사된다.
@@ -521,16 +522,16 @@ $ docker cp ./build/. my-nginx:usr/share/nginx/html/
 
 ```bash
 # 모든 경로 마지막에 슬래시 추가
-$ docker cp ./build/ my-nginx:usr/share/nginx/html/
+$ docker cp ./build/ my-nginx:/usr/share/nginx/html/
 
 # 상대 경로만 마지막에 슬래시 추가
-$ docker cp ./build my-nginx:usr/share/nginx/html/
+$ docker cp ./build my-nginx:/usr/share/nginx/html/
 
 # 소스 경로만 마지막에 슬래시 추가
-$ docker cp ./build/ my-nginx:usr/share/nginx/html
+$ docker cp ./build/ my-nginx:/usr/share/nginx/html
 
 # 모든 경로 마지막에 슬래시 제거
-$ docker cp ./build my-nginx:usr/share/nginx/html
+$ docker cp ./build my-nginx:/usr/share/nginx/html
 ```
 
 <br>
@@ -686,6 +687,25 @@ $ docker volume create (볼륨명)
 
 ```bash
 $ docker volume rm (볼륨명)
+```
+
+<br>
+
+## 컨테이너와 함께 볼륨 삭제
+- 컨테이너 삭제 시 `v` 옵션으로 볼륨도 같이 삭제할 수 있다.
+- 단 `익명 볼륨`인 경우에만 삭제되고 `Named 불륨`인 경우에는 삭제되지 않는다.
+
+```bash
+$ docker rm -v [컨테이너이름]
+```
+
+<br>
+
+## 사용하지 않는 모든 볼륨 삭제
+- 컨테이너 실행, 중지와 무관하게 컨테이너와 연결되지 않은 모든 볼륨을 삭제한다.
+  
+```bash
+$ docker volume prune
 ```
 
 <br>
