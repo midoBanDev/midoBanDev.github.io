@@ -127,9 +127,153 @@ COPY ./src /app/
 
 
 ## 3 Tier 아키텍처 구성
+일반적으로 엔터프라이즈 웹 애플리케이션은 3가지 종류의 서버로 구성된다.
+- 프론트엔드 소스를 제공하는 웹 서버
+- 비즈니스 로직을 수행하는 웹 애플리케이션 서버
+- 데이터베이스 서버
+이 3가지 종류의 서버가 유기적으로 상호작용하면서 하나의 애플리케이션으로 구성되는 것을 `3-Tier 아키텍처(architecture)`라고 부른다.
+
+Tier는 하나의 단계를 의미한다. 
+웹 애플리케이션 아키텍쳐에서는 클라이언트가 서비스를 사용하는 과정에서 서버가 크게 3가지 단계로 구성되어 있다는 것을 의미한다.
+
+
+많은 엔터프라이즈 웹 애플리케이션이 이 3T와 아키텍터를 기반으로 구성되어 있고요.
+3-Tier 애플리케이션에서 가장 먼저 클라이언트의 첫 번째 진입점 역할은 웹 서버가 담당한다.
+웹 서버의 구성 요소인 프론트엔드는 백엔드 애플리케이션으로 요청을 보낸 원하는 작업을 처리한 후 응답해준 정보를 클라이언트에게 제공한다.
+
+보통 프론트엔드 애플리케이션의 소스에는 백앤드 애플리케이션에 대한 API 정보가 적혀 있다.
+이를 통해 클라이언트의 브라우저가 프론트엔드 소스 코드의 API 정보를 읽어 백엔드 서버의 요청을 보내게 된다.
+이 뜻은 클라이언트(브라우저)가 직접 백앤드 서버에 요청하는 것을 의미한다. 
+
+하지만 이렇게 사용자(클라이언트)가 백앤드 애플리케이션을 직접 접근하는 것은 좋지 않다.
+백앤드 애플리케이션은 시스템과 실제 데이터에 밀접한 연관이 있기 때문에 보안에도 특히 주의해야 한다.
+API가 노출되어 전체 시스템의 위험을 주는 일이 없도록 백앤드 애플리케이션은 일반 사용자가 직접 접근하는 것을 막는 것이 일반적이다.
+
+웹 서버인 nginx의 프록시 기능을 활용하면 백앤드 애플리케이션의 접근을 제한할 수 있다.
+프록시 구조를 만들면 백앤드 애플리케이션에 대한 요청은 웹 서버를 통해서만 접근이 가능하다.  
+<img src="https://github.com/user-attachments/assets/cfd95fc5-1aae-4552-a57e-7da85e442eac" width="90%" height="80%"/>
+
+
+프록시 설정을 하기 위해서는 nginx 이미지를 빌드할 때 nginx.conf 설정 정보를 변경하여 프록시 기능을 적용하면 된ㄷ.
+
+```nginx
+server {
+    listen       80;
+    server_name  _;
+    
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
+    
+    location /api/ {
+        proxy_pass http://leafy:8080;
+    }
+    
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+}
+```
+
+<div style="padding-top:40px;"></div>
+<span style="margin-left:35%;">⊙</span>
+<span style="margin-left:10%">⊙</span>
+<span style="margin-left:10%">⊙</span>
+<div style="padding-top:40px;"></div>
+
+## 동적 서버 구성
+Nginx 서버 설정에 백엔드 애플리케이션의 주소가 고정되어 있으면 환경 별로 Nginx가 프록시 해야 하는 주소가 바뀔 때마다 프록시 설정의 주소를 바꾸기 위해 이미지 빌드를 다시 해야 한다.
+웹 서버의 설정 정보의 엔드 포인트 API 주소 부분을 동적으로 변경되도록 하여 이런 문제에 대해 유연하게 대처할 수 있다. 
+즉 환경 별로 달라지는 정보는 시스템 환경 변수로 처리하면 컨테이너 실행 시 결정할 수 있다.
+
+**1. nginx.conf 파일 설정 변경**  
+- nginx 프록시 설정 안에 백엔드 엔드 포인트 API를 환경 변수로 설정한다.
+  
+```nginx
+location /api/ {
+  proxy_pass http://${BACKEND_HOST}:${BACKEND_PORT};
+}
+```
+
+**2. Dockerfile 작성**
+- Dockerfile 내에 프로덕션 스테이지 빌드 시 환경변수를 전달받아 최종 nginx.conf 파일을 생성한다.
+- 실제 nginx.conf 파일에 변수를 적용하는 역할은 **docker-entrypoint.sh** 파일이 담당한다.
+  
+```dockerfile
+# 빌드 이미지로 node:14 지정 
+FROM node:14 AS build
+
+# .. 중간 생략
+
+# 소스코드 빌드
+RUN npm run build
+
+
+# 프로덕션 스테이지
+FROM nginx:1.21.4-alpine 
+# nginx 설정 파일을 만들기 위한 템플릿 파일을 복사
+COPY nginx.conf /etc/nginx/conf.d/default.conf.template
+
+# 전달 받을 환경 변수를 설정
+# ENV 환경변수명 기본값
+ENV BACKEND_HOST loan-api
+ENV BACKEND_PORT 8080
+
+# 전달 받은 환경 변수를 nginx 설정파일에 적용하기 위한 스크립트 파일을 복사
+COPY docker-entrypoint.sh /usr/local/bin/
+# 스크립트 파일 실행 권한 부여
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+# 빌드 이미지에서 생성된 dist 폴더를 nginx 이미지로 복사
+COPY --from=build /app/dist /usr/share/nginx/html
+
+EXPOSE 80
+
+# 실제 실행 명령어 : docker-entrypoint.sh nginx -g daemon off;
+# docker-entrypoint.sh 스크립트 파일의 인자로 nginx -g daemon off; 를 전달한다는 의미
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+**3. docker-entrypoint.sh 파일 작성**
+- `docker-entrypoint.sh` 파일은 환경 변수를 전달받아 최종 nginx.conf 파일을 생성한 후 nginx를 실행하는 스크립트 파일이다.
+
+```shell
+#!/bin/sh
+
+# 파일명 : docker-entrypoint.sh
+
+# set -e는 에러가 발생하면 스크립트를 즉시 종료하도록 설정한다.
+# 특정 명령이 실패할 경우, 그 이후의 명령은 실행되지 않는다.
+set -e
+
+# default.conf.template 파일에서 환경 변수를 대체하고 결과를 default.conf에 저장
+# envsubst는 환경 변수 값을 텍스트에 삽입(substitute)하는 유틸리티이다.
+# ENV BACKEND_HOST=api-server 와 같이 환경 변수가 설정되면(또는 빌드 시 -e 옵션을 통해 환경 변수를 전달 받으면)
+# 본 파일 실행 시 envsubst가 템플릿 파일(/etc/nginx/conf.d/default.conf.template)에서 ${BACKEND_HOST} 부분을 찾아 설정된 값(api-server)으로 대체한다.
+# 최종 결과는 /etc/nginx/conf.d/default.conf 파일에 저장된다.
+envsubst '${BACKEND_HOST} ${BACKEND_PORT}' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf
+
+# exec는 현재 쉘 프로세스를 대체하여 지정된 명령을 실행합니다.
+# "$@"는 스크립트 실행 시 전달된 모든 인수를 그대로 전달합니다.
+# 예를 들어, docker-entrypoint.sh nginx -g daemon off;이 실행 되었으면 docker-entrypoint.sh 파일 실행 후 전달 받은 인수 nginx -g "daemon off;"를 최종 실행한다.
+exec "$@"
+```
+
+- `/usr/local/bin/`
+`/usr/local/bin/` 경로 대부분 Linux 시스템에서 기본적으로 PATH 환경변수에 포함되어 있다. 
+`PATH`는 쉘이 실행 가능한 파일을 찾는 디렉토리 목록이다. 
+그래서 해당 경로에 있는 스크립트 파일을 전체 경로를 포함하지 않고 파일만으로 실행할 수 있다.
+
+`docker-entrypoint.sh` 이렇게 파일만 실행해도 PATH 환경변수로 경로를 찾아 실제로 `/usr/local/bin/docker-entrypoint.sh` 로 실행된다.
+<img src="https://github.com/user-attachments/assets/9fd640cc-6984-401c-b4b0-7eb796e6661c" width="60%" height="80%"/>
 
 
 
+
+<img src="" width="90%" height="80%"/>
 <img src="" width="90%" height="80%"/>
 <img src="" width="90%" height="80%"/>
 <img src="" width="90%" height="80%"/>

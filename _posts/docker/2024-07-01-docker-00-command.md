@@ -754,3 +754,13 @@ $ docker container inspect (컨테이너명)
             }
         ],
 ```
+
+<div style="padding-top:100px;"></div>
+<span style="margin-left:35%;">⊙</span>
+<span style="margin-left:10%">⊙</span>
+<span style="margin-left:10%">⊙</span>
+<div style="padding-top:100px;"></div>
+
+# Docker Compose
+여러 컨테이너들을 하나의 yaml 파일로 관리할 수 있다.
+
