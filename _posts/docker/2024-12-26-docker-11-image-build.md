@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "[Docker] 이미지 빌드(Image Build)"
+title:  "[Docker] 이미지 빌드(Image Build) - Dockerfile"
 categories:
   - Docker
 tags:
@@ -92,7 +92,7 @@ CMD ["명령어"]
 ### 1. 디렉토리 및 필수 파일 생성.
 1. VSCode를 실행한다.
 2. `easydocker` 폴더를 생성한다. 
-3. `easydocker` 안에 `build` 폴더를 생성한다. - 생략해도 된다.
+3. `easydocker` 안에 `build` 폴더를 생성한다.
 4. `build` 폴더 안에 `index.html` 파일과 `Dockerfile` 파일을 생성해 준다.
 <img src="https://github.com/user-attachments/assets/8a74bdaa-5c2a-4795-bd83-288b2a782a68" width="50%" height="80%"/>
 

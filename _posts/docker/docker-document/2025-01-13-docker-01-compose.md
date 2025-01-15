@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "How Compose works"
+title:  "[DockerDoc] How Compose works"
 categories:
   - DockerDoc
 tags:

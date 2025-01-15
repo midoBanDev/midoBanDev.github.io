@@ -42,6 +42,7 @@ Postgres는 Nginx처럼 이미지에 소프트웨어가 포함되어 있기 때�
 프로젝트 구조는 다음과 같다. 
 프로젝트명 `postgres-infra` 를 만든 후 아래와 같은 구조를 가지는 프로젝트를 만든다.
 이를 `github`, `gitlab` 등의 버전 관리 시스템을 통해 관리한다.
+
 ```Plaintext
 postgres-infra/
 ├── Dockerfile.dev

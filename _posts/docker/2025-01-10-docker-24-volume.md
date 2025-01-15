@@ -235,6 +235,10 @@ $ docker volume prune
 <div style="padding-top:40px;"></div>
 
 ## 도커 볼륨 명령어
+Dockerfile에서는 Named Volume을 직접 지정할 수 없다. 
+Dockerfile의 VOLUME 지시문은 특정 경로에 대해 익명 볼륨을 생성할 수 있게만 설계되었다. 
+Named Volume은 컨테이너 실행 시 `docker run` 명령어 또는 `Docker Compose` 파일에서 명시적으로 정의해야 한다.
+
 
 ### Volume 리스트 조회
 - `volume` 명령어 사용
