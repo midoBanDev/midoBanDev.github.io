@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "[Docker] 도커 컴포즈 실전"
+title:  "[Docker] 도커 CI 환경 구성 - Github Actions"
 categories:
   - Docker
 tags:
@@ -16,9 +16,12 @@ toc_sticky: true
 
 <br>
 
-## 로컬, 개발, 운영 세 가지 프로세스 로컬에 띄우기
+## 워크플로우(workflow)
+워크플로(workflow)는 CI/CD 파이프라인에서 하나 이상의 작업을 실행할 구성 가능한 자동화된 프로세스를 말한다. 
+쉽게 말해 CI/CD 파이프라인의 실제 설계도를 의미한다. 
+워크플로는 `.github/workflows` 디렉터리에 YAML 파일로 정의된다. 
 
-<img src="" width="90%" height="80%"/>
+
 
 
 <div style="padding-top:40px;"></div>
@@ -28,8 +31,8 @@ toc_sticky: true
 <div style="padding-top:40px;"></div>
 
 
-
-
+<img src="" width="90%" height="80%"/>
+<img src="" width="90%" height="80%"/>
 <img src="" width="90%" height="80%"/>
 <img src="" width="90%" height="80%"/>
 <img src="" width="90%" height="80%"/>

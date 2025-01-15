@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "Docker 준비하기"
+title:  "[Docker] Docker 준비하기"
 categories:
   - Docker
 tags:

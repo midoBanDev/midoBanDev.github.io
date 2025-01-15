@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "이미지 레이어(Image Layer)"
+title:  "[Docker] 이미지 레이어(Image Layer)"
 categories:
   - Docker
 tags:

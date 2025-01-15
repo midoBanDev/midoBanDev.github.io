@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "이미지 커밋(Image Commit)"
+title:  "[Docker] 이미지 커밋(Image Commit)"
 categories:
   - Docker
 tags:

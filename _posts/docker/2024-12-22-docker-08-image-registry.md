@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "이미지 레지스트리"
+title:  "[Docker] 이미지 레지스트리"
 categories:
   - Docker
 tags:

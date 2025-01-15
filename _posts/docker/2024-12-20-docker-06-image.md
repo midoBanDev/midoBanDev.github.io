@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "이미지(Image)"
+title:  "[Docker] 이미지(Image)"
 categories:
   - Docker
 tags:

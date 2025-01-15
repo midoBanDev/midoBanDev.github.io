@@ -145,113 +145,66 @@ build에 지정된 경로(./app)의 Dockerfile을 사용해서 image에 명시�
 - `build: args:` 빌드 시점에 필요한 환경 변수를 주입할 수 있다.
 - `environment`와 `env_file` 옵션은 컨테이너 런타임 시점에 환경변수를 설정할 수 있다. 
 
+<br>
 
-**build: args: 설정 방법 및 실행 순서**
-
-- `.env` 파일
-  
-```env
-# .env 파일
-REACT_APP_GOOGLE_CLIENT_ID=google-client-id
-```
-
-- `compose.xml` 파일
-  
-```yaml
-networks:
-  loan-api:
-    external: true 
-
-services:
-  loan-front:
-    build:
-      # 빌드 컨텍스트 지정
-      context: .
-      # 빌드 인자 전달
-      args:
-        - REACT_APP_GOOGLE_CLIENT_ID=${REACT_APP_GOOGLE_CLIENT_ID}
-    image: loan-front-img:1.0.0
-    restart: on-failure
-    ports:
-      - 3000:80
-    networks:
-      - loan-api
-```
-
-```dockerfile
-
-# .. 이전 스테이지 생략
-
-# 빌드 스테이지 분리
-FROM node:22.11.0 as build
-WORKDIR /app
-
-COPY --from=source /app .
+**`build: args:` 설정 방법**
  
-COPY --from=dependencies /app/node_modules ./node_modules
+Docker Compose의 `up -d --build` 명령어의 실행 과정을 보고 빌드 시점에 환경 변수가 어떻게 적용되는지 알아보자.
 
-# 빌드 시 build-arg 로 환경변수 전달
-# GOOGLE_CLIENT_ID는 빌드 전에 전달되어야 한다.
-# node 기반의 프로젝트는 Java 기반 프로젝트와 다르게 빌드 전 환경변수를 설정한 후 빌드되어야 한다.
-ARG REACT_APP_GOOGLE_CLIENT_ID
-ENV REACT_APP_GOOGLE_CLIENT_ID=${REACT_APP_GOOGLE_CLIENT_ID}
-
-RUN npm run build
-
-
-# .. 이후 스테이지 생략
-
-```
-
-**실행순서**  
-Docker Compose의 up -d --build 명령어의 실행 순서
-
-1. docker-compose.yml 파일과 .env 파일을 먼저 읽습니다
-이 때 docker-compose.yml의 변수들(${...})을 .env 파일의 값으로 대체합니다
+1. docker-compose.yml 파일과 .env 파일을 먼저 읽는다
+- 이 때 docker-compose.yml의 변수들(${...})을 .env 파일의 값으로 대체한다.
 
 
 2. 빌드 컨텍스트 준비
-
-build 지시어가 있는 서비스들에 대해 빌드 컨텍스트를 준비합니다
-args에 지정된 값들이 이 시점에서 결정됩니다
+- build 지시어가 있는 서비스들에 대해 빌드 컨텍스트를 준비한다.
+- `args`에 지정된 값들이 이 시점에서 결정된다.
 
 
 3. Dockerfile을 사용한 이미지 빌드
+- Dockerfile의 ARG는 compose의 build.args에서 전달된 값을 받는다.
+- 이미지 빌드 과정이 진행된다.
 
-Dockerfile의 ARG는 compose의 build.args에서 전달된 값을 받습니다
-이미지 빌드 과정이 진행됩니다
 
-
-컨테이너 생성 및 실행
-
-빌드된 이미지로 컨테이너를 생성합니다
-environment, env_file, secrets 등 런타임 설정이 적용됩니다
+4. 컨테이너 생성 및 실행
+- 빌드된 이미지로 컨테이너를 생성한다.
+- `environment`, `env_file`, `secrets` 등 런타임 설정이 적용된다.
 
 
 
 예를 들어:
-yamlCopy# docker-compose.yml
+```yaml
+# docker-compose.yml
 services:
   app:
     build:
       context: .
       args:
         - BUILD_TIME_VAR=${ENV_FILE_VAR}  # .env에서 값을 가져옴
-envCopy# .env
+```
+
+```plaintext
+# .env
 ENV_FILE_VAR=some_value
-dockerfileCopy# Dockerfile
+```
+
+```dockerfile
+# Dockerfile
 ARG BUILD_TIME_VAR
 ENV BUILD_TIME_VAR=$BUILD_TIME_VAR
 
 RUN echo "Building with: $BUILD_TIME_VAR"
+```
 이 경우:
 
-.env 파일의 ENV_FILE_VAR 값을 읽음
-compose의 BUILD_TIME_VAR arg에 그 값을 전달
-Dockerfile의 ARG가 그 값을 받아 빌드에 사용
+1. .env 파일의 ENV_FILE_VAR 값을 읽음
+2. compose의 BUILD_TIME_VAR arg에 그 값을 전달
+3. Dockerfile의 ARG가 그 값을 받아 빌드에 사용
 
 
-**environment 설정 방법**  
+<br>
+
+
+**`environment` 설정 방법**  
 - `environment`는 compose.yml 파일 내에 `키-값` 형태로 직접 작성한다. 
 - 변수 값 셋팅은 `key=value` 형태로 작성해야 한다.
 - environment 컨테이너 런타임에 주입되는 환경 변수다. 따라서 빌드 시점에 필요한 환경 변수는 `build: args:` 을 사용해야 한다.
@@ -298,7 +251,8 @@ $ API_KEY=your-secret-key docker compose up
 
 <br>
 
-**env_file 설정 방법**   
+**`env_file` 설정 방법**   
+
 `env_file` 방식을 컨테이너 런타임 시 환경 변수를 주입할 수 있다. 
 만약 빌드 시점에 필요한 환경 변수는 env_file 방식 대신 `build: args:` 을 사용해야 한다.
 
