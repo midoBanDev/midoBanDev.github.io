@@ -338,6 +338,7 @@ div.highlighter-rouge {
   &.language-css::before { content: "Css"; }
   &.language-scss::before { content: "Scss"; }
   &.language-shell::before { content: "Shell"; }
+  &.language-powershell::before { content: "Powershell"; }
   &.language-bash::before { content: "Bash"; }
   &.language-ruby::before { content: "Ruby"; }
   &.language-yaml::before { content: "Yaml"; }

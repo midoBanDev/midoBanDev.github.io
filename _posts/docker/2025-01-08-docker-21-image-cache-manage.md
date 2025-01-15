@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "이미지 캐시 관리"
+title:  "[Docker] 이미지 캐시 관리"
 categories:
   - Docker
 tags:
@@ -127,6 +127,36 @@ Build Cache     28        0         0B        0B
 - 즉 연결된 이미지를 삭제해야 캐시 이미지도 삭제할 수 있다.(컨테이너와 무관)
 ```bash
 $ docker builder prune
+```
+
+
+## 특정 부분 캐시 무효화 방법
+멀티 스테이지 빌드를 사용하여 레이어 캐시를 활용할 때 간혹 특정 스테이지만 캐시 무효화하고 싶은 경우가 있다. 
+Dockerfile를 가지고 빌드를 하는 경우에는 target을 지정할 수 있으나 Docker Compose를 사용하는 경우에는 target을 지정할 수 없다. 
+이때 활용할 수 있는 방법을 소개한다. 
+
+- ARG 지시어를 사용하여 캐시 무효화
+  
+```dockerfile
+
+# 빌드 스테이지 분리
+FROM node:22.11.0 as build
+WORKDIR /app
+
+COPY --from=source /app .
+ 
+COPY --from=dependencies /app/node_modules ./node_modules
+
+# 의미 없는 ARG 지시어를 사용하여 캐시 무효화
+ARG CACHE_BUST=1
+
+# 아래 이후부터 캐시 무효화 되기를 원한 경우
+ARG REACT_APP_GOOGLE_CLIENT_ID
+ENV REACT_APP_GOOGLE_CLIENT_ID=${REACT_APP_GOOGLE_CLIENT_ID}
+
+RUN npm run build
+
+
 ```
 
 

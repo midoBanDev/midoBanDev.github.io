@@ -119,6 +119,7 @@ ENTRYPOINT ["java", "-jar", "backend-app.jar"]
 ## application.properties
 - `${DB_URL:localhost}` DB_URL을 환경변수로 선언하고, 만약 DB_URL 변수에 값이 넘어오지 않으면 localhost를 사용한다는 의미다.
 - 사용 방법은 `docker run -e DB_URL=<원하는url입력>` 으로 사용 가능하다.
+  
 ```Yaml
 # Postgresql Database
 spring.datasource.driver-class-name=org.postgresql.Driver
@@ -135,6 +136,7 @@ spring.datasource.password=${DB_PASSWORD:mypassword}
 
 ## 이미지 빌드
 - 빌드 컨텍스트에서 실행하면 된다.
+  
 ```bash
 $ docker build -t my-backend .
 ```
@@ -142,19 +144,23 @@ $ docker build -t my-backend .
 <br>
 
 ## 컨테이너 실행
-- 같은 네트워크를 사용하면 외부에 공개되지 않은 DB에 접근할 수 있다.
+- 같은 네트워크를 사용하면 DB 서버를 외부에 공개하지 않고 접근할 수 있다.
+- 보안 상 API 서버와 DB 서버는 포트포워딩 사용을 제한하여 외부 접근을 막는 것이 좋다. 
 - 방법은 백엔드의 `application.properties(or application.yml)`에 `${DB_URL}`로 환경 변수를 설정하고 컨테이너 실행 시 `DB 컨테이너명`을 적용하면 된다.
+  
 ```Yaml
 spring.datasource.url=jdbc:postgresql://${DB_URL:localhost}:${DB_PORT:5432}/${DB_NAME:mydb}
 ```
 
 - 네트워크 생성
+  
 ```bash
 # docker network create <네트워크명명>
 $ docker network create my-network
 ```
 
 - 컨테이너 실행
+  
 ```bash
 # docker run -d -p <외부포트:내부포트> --network <네트워크명> -e DB_URL=<DB 컨테이너명> --name <컨테이너명> <이미지명>
 $ docker run -d -p 8080:8080 --network my-network -e DB_URL=<DB 컨테이너명> --name backend-app my-backend

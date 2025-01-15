@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "도커 Volume"
+title:  "[Docker] 도커 볼륨 - Docker Volume"
 categories:
   - Docker
 tags:
@@ -138,10 +138,16 @@ $ docker volume create mydata
 바인드 마운트는 도커가 직접 관리하는 독립된 저장소가 아닌 내 호스트 OS의 `원하는 경로를 마운트`하는 방식을 말한다.
 -v 옵션의 볼륨명 자리에 호스트OS의 내부 경로를 지정하는 방식으로 사용할 수 있다.
 - `docker run -v <호스트OS내부경로>:<컨테이너내부경로>`
-  
-```bash
+- 실행 도구를 `gitbash`를 사용하는 경우 경로 지정에 오류가 발생할 수 있다. 정신 건강을 위해 `powershell`을 사용하는 걸 권장한다.
+
+```powershell
+# 절대경로
 $ docker run -v /data/mypostgres:/var/lib/postgresql/data
+
+# 현재 경로를 지정하고 싶은 경우 
+$ docker run -d -v ${PWD}:/var/lib/postgresql/data -e POSTGRES_PASSWORD=pass --name postgres-data postgres:13
 ```
+
 <img src="https://github.com/user-attachments/assets/945a48a7-9a58-4c73-a453-3aabfea4e9bd" width="80%" height="80%"/>
 <div class="br15"/>
 

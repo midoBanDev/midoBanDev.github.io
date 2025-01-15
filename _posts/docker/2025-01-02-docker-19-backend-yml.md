@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "이미지 빌드 시 테스트 환경 구성(feat. application.yml)"
+title:  "[Docker] 이미지 빌드 시 테스트 환경 구성(feat. application.yml)"
 categories:
   - Docker
 tags:
@@ -14,17 +14,16 @@ toc_sticky: true
 <br>
 
 ## 현재 상황 분석
-현제 API 프로젝트에 Srping REST Docs를 적용 하였다.
-Spring REST Docs은 테스트 기반 API 문서화 도구로써 빌드 시 테스트를 거쳐 통과한 경우 API 문서를 생성한다. 
+현제 API 프로젝트에 `Srping REST Docs`를 적용 하였다.
+Spring REST Docs은 테스트 기반 API 문서화 도구로써 빌드 시 테스트를 거쳐 통과한 경우 API 문서를 생성해 준다.
 
-Local 환경에서는 `test/java/com/../` 밑에 application.xml 을 추가하여 일반 테스트, 빌드 테스트 모두 정상 작동이 되도록 하였다.
+Local 환경에서는 `test/java/com/../` 밑에 application.xml 을 추가하여 일반(수동) 테스트, 빌드 테스트 모두 정상 작동이 되도록 하였다.
 그런데 문제는 Docker 이미지 빌드 시 `gradle 빌드 시점`에는 `test/java/com/../application.xml`이 실행되지 않는다. 
-테스트 결과 `main application.xml`이 실행된다.
-
+테스트 결과 `main application.xml`이 실행된다. 방법을 모르는 것일 수도 있겠지..
 
 <details>
 <summary> 
-<b><span>테스트 application.xml</span></b>
+<b><span>테스트 application.xml 내용</span></b>
 </summary>
 
 <div markdown="1">
@@ -92,12 +91,15 @@ logging:
 </div>
 </details>
 
-이유는 다음과 같다(100% 확실하지는 않음)
 
-로컬 환경에서 테스트를 실행:
+이유는 다음과 같다고 받아드리고 해결 방법을 찾음(100% 확실하지는 않음)
+
+로컬 환경에서 테스트 실행:
 - IDE나 로컬 Gradle에 `src/test/resources`를 클래스패스에 추가되어 있다.
 - 테스트 리소스가 메인 리소스보다 우선순위가 높게 설정되어 있다.
 - 그래서 별도 설정 없이도 test/application.yml이 자동으로 인식된다.
+
+<br>
 
 Docker에서 Gradle 실행:
 
@@ -116,13 +118,25 @@ FROM gradle:8.11.1-jdk17 AS builder
 
 
 ## 해결 방안
-main application.xml에 환경별로 profile을 구성한다. 
-### 1. test class에 `@ActiveProfiles("test")` 를 선언한다.
+main application.xml에 환경별로 profile을 구성과 테스트 클래스에 activeprofile 설정을 통해 해결할 수 있었다. 
+참고로 이 외에도 다양한 시도를 했고, 계속 실패를 했었다. 계속해서 test profiles가 active 되지 않는 문제를 겪었다.
+
+시행착오 끝에 알아낸 원인은 이미지 빋드 시 도커 이미지 레이어 캐시가 내 발목을 잡고 있었다. 
+사실 이 부분도 지금 생각해보면 엄밀히 말해 소스 코드 변경에 의해 캐시 이미지 레이어를 사용하지 않을텐데 당시에는 `--no-cache`로 해결되다 보니 그렇게 생각한 듯 하다.
+왜냐면 test profiles을 active 시키기 위해 소스 코드를 매번 수정했기 때문이다. 그럼 도커의 이미지 레이어 규칙에 따라 새로운 레이어를 생성해야 하는데 당시에는 왜 안되었는지 모르겠다.
+
+```bash
+$ docker build --no-cache -t loan-manager-api .
+```
+
+
+### 1. test class에 `@ActiveProfiles("test")` 를 선언
 
 - 처음에는 `-Dspring.profiles.active=test` 와 같이 환경 변수를 이용하려 했으나, `-D` 옵션이 Gradle 빌드 프로세스에는 전달되지만, 실제 테스트가 실행되는 JVM에는 전달되지 않는 것으로 보인다.
-- `-D` 옵션은 local, Dockerfile 모두 적용되지 않았다. 
+- `-D` 옵션은 local에서 빌드할 때, Dockerfile로 빌드할 때 모두 적용되지 않았다. 
 
-- `export` 방법은 가능하다.
+
+- 참고로 `@ActiveProfiles("test")`를 선언하지 않아도 `export` 방법으로는 가능하다.
 
 ```bash
 $ export SPRING_PROFILES_ACTIVE=test
