@@ -213,9 +213,11 @@ RUN echo "Building with: $BUILD_TIME_VAR"
 
 
 **`environment` 설정 방법**  
-- `environment`는 compose.yml 파일 내에 `키-값` 형태로 직접 작성한다. 
-- 변수 값 셋팅은 `key=value` 형태로 작성해야 한다.
-- environment 컨테이너 런타임에 주입되는 환경 변수다. 따라서 빌드 시점에 필요한 환경 변수는 `build: args:` 을 사용해야 한다.
+**environment**는 컨테이너 런타임에 주입되는 환경 변수를 정의하는 옵션이다. 
+compose.yml 파일 내에 `key=value` 형태로 작성해야 한다.
+
+**environment**에 설정된 값은 컨테이너 런타임 시 전달되는 환경 변수이기 때문에 도커 파일 내의 ENV 환경 변수로 전달되지 않는다. 
+따라서 빌드 과정에 필요한 환경 변수는 `build: args:` 을 사용하여 ARG로 받아 ENV에 전달해야 한다.
 
 **1. 직접 환경 변수 정의** 
 ```yaml
@@ -252,8 +254,15 @@ services:
 - `DEBUG=1` 처럼 값을 직접 지정할 수도 있고, `API_KEY=${API_KEY}`처럼 인수 값을 전달 받도록 설정할 수도 있다. 
 
 **3. 인수 값 전달 및 실행**  
+Compose에 인수 값 전달은 compose up 실행 시점에 직접 전달할 수도 있고, .env 파일을 통해 전달 할 수도 있다.
+
+```plaintext
+# .env
+API_KEY=your-secret-key
+```
 
 ```bash
+# 실행 시 직접 전달
 $ API_KEY=your-secret-key docker compose up
 ```
 

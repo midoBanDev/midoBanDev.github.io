@@ -219,7 +219,7 @@ PostgreSQL의 공식 이미지를 선택할 때는 버전 선택이 중요합니
 **환경 변수 설정**  
 
 환경 변수는 컨테이너 초기화 시 매우 중요한 역할을 합니다.  
-컨테이너 실행 시 PostgreSQL을 처음 초기화할 때 `ENV`로 지정한 `POSTGRES_USER`, `POSTGRES_PASSWORD`,`POSTGRES_DB`의 환경변수를 읽어서 DB와 유저를 생성합니다.
+컨테이너 실행 시 PostgreSQL을 처음 초기화할 때 `ENV`로 지정한 `POSTGRES_USER`, `POSTGRES_PASSWORD`,`POSTGRES_DB`,`POSTGRESQL_POSTGRES_PASSWORD` 환경변수를 읽어서 DB와 유저를 생성합니다.
 이 환경 변수들이 postgreSQL의 초기화 시 어떻게 사용되는지 알아봅시다.
 
 **1. `POSTGRES_PASSWORD` 만 설정**  
@@ -267,6 +267,16 @@ ENV POSTGRES_DB=mydb
 PostgreSQL을 처음 초기화하는 시점에는 `POSTGRES_PASSWORD` 를 필수로 지정해야 postgreSQL이 실행이 된다.(설정 안하면 실행 안됨)  
 `postgres DB` 와 `Owner` 는 `postgres`로 자동 생성 되지만 비밀번호는 사용자가 지정해야 한다.
 `POSTGRES_USER` 생성된 계정은 관리자 계정의 권한을 가집니다.
+
+**4. `POSTGRESQL_POSTGRES_PASSWORD` 설정**   
+```dockerfile
+ENV POSTGRES_USER=myuser
+ENV POSTGRESQL_POSTGRES_PASSWORD=adminpassword
+ENV POSTGRES_PASSWORD=mypassword
+ENV POSTGRES_DB=mydb
+```
+- 최고 관리자 계정의 비밀번호를 설정한다.
+- 해당 환경 변수를 사용하면 `POSTGRES_PASSWORD`의 비밀번호는 사용자 계정의 비밀번호로만 사용된다.
 
 
 관리자 계정으로 접속하여 다음과 같은 작업을 수행할 수 있다.

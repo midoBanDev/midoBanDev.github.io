@@ -181,8 +181,6 @@ COPY --from=source /app .
  
 COPY --from=dependencies /app/node_modules ./node_modules
 
-# 빌드 시 build-arg 로 환경변수 전달
-# GOOGLE_CLIENT_ID는 빌드 전에 전달되어야 한다.
 # node 기반의 프로젝트는 Java 기반 프로젝트와 다르게 빌드 전 환경변수를 설정한 후 빌드되어야 한다.
 ARG REACT_APP_GOOGLE_CLIENT_ID
 ENV REACT_APP_GOOGLE_CLIENT_ID=${REACT_APP_GOOGLE_CLIENT_ID}
@@ -296,6 +294,17 @@ services:
       - loan-api
 ```
 
+<div style="padding-top:40px;"></div>
+<span style="margin-left:35%;">⊙</span>
+<span style="margin-left:10%">⊙</span>
+<span style="margin-left:10%">⊙</span>
+<div style="padding-top:40px;"></div>
+
+## Override 
+
+```yaml
+
+```
 
 <img src="" width="90%" height="80%"/>
 <img src="" width="90%" height="80%"/>
