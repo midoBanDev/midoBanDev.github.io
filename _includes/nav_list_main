@@ -103,6 +103,20 @@
                 {% endif %}
             {% endfor %}
         </ul>
+        <ul>
+            {% for category in site.categories %}
+                {% if category[0] == "Nginx" %}
+                    <li><a href="/categories/nginx" class="">Nginx ({{category[1].size}})</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>        
+        <ul>
+            {% for category in site.categories %}
+                {% if category[0] == "Network" %}
+                    <li><a href="/categories/network" class="">Network ({{category[1].size}})</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>    
 
         <span class="nav__sub-title">Linux</span>
         <ul>
