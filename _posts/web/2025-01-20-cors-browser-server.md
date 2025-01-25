@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "서버의 CORS 검증"
+title:  "[WEB] 서버의 CORS 검증"
 categories:
   - Web
 tags:
