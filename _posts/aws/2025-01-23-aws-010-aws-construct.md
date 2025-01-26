@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "[AWS] AWS의 구조"
+title:  "[AWS] AWS의 기본 구조"
 categories:
   - Aws
 tags:
@@ -36,17 +36,19 @@ AWS 같은 클라우드 서비스들은 기본적으로 **온디맨드(On-Demand
 <span style="margin-left:10%">⊙</span>
 <div style="padding-top:60px;"></div>
 
-## 리전(Region)과 가용 영역(AZ, Availability Zone)
-AWS는 전 세계적으로 분산된 클라우드 인프라를 제공하며, 이를 구성하는 주요 요소는 `리전(Region)`, `가용 영역(AZ, Availability Zone)`, 그리고 `에지 로케이션(Edge Location)` 이다. 
-AWS의 인프라는 안정성과 가용성을 극대화하기 위해 설계되었으며, 이를 이해하면 AWS 서비스의 작동 방식과 선택 기준을 명확히 알 수 있다.
+## AWS 기본 구조
+AWS는 전 세계적으로 분산된 클라우드 인프라를 제공하며, 이를 구성하는 주요 요소는 크게 `리전(Region)`, `가용 영역(AZ, Availability Zone)`으로 구성된다. 
+AWS의 인프라는 안정성과 가용성을 극대화하기 위해 설계되었으며, 이를 이해하면 AWS 서비스의 작동 방식과 선택 기준을 명확히 알 수 있다.  
+<img src="https://github.com/user-attachments/assets/b59810ba-4963-461e-b725-45044d60ca64" width="80%" height="80%"/>
 
+<br>
 
 ### AWS 리전(Region)
 
 **리전(Region)**은 AWS가 제공하는 서비스의 물리적 위치를 나타낸다. 
 이는 AWS가 클라우드 서비스를 제공하는 가장 큰 단위이며, 전 세계 여러 곳에 분산되어 있다. 
 AWS의 세계적으로 분표되어 있는 리전은 사용자와 가까운 위치에서 서비스를 제공하여 지연 시간을 줄이고 성능을 향상시키기 위해 존재한다.  
-<img src="https://github.com/user-attachments/assets/a3af37e7-8ff7-4615-a0e5-ae1450b34af8" width="80%" height="80%"/>
+<img src="https://github.com/user-attachments/assets/abf71b0a-4304-4601-9c11-d2144417302a" width="80%" height="80%"/>
 
 **리전의 특징**  
 - 각 리전은 고유 코드를 가지고 있다. 
@@ -92,34 +94,6 @@ AWS 서비스를 사용하는 중에 만약 하나의 데이터 센터에서 문
 
 이렇게 설정함으로써 보안이 강화되고, 특정 AZ로 트래픽이 몰리는 것을 방지할 수 있다. 
 간단히 말해, 모든 계정이 동일한 가용 영역(AZ)을 사용하지 않도록 랜덤하게 배정하여 안전성과 균형을 유지한다.
-
-<div style="padding-top:60px;"></div>
-<span style="margin-left:35%;">⊙</span>
-<span style="margin-left:10%">⊙</span>
-<span style="margin-left:10%">⊙</span>
-<div style="padding-top:60px;"></div>
-
-## 에지 로케이션(Edge Location)
-에지 로케이션은 AWS의 콘텐츠 배포 네트워크(CDN, Content Delivery Network)를 구성하는 물리적 거점을 말한다. 
-에지 로케이션은 전 세계적으로 리전보다 훨씬 많은 곳에 분포되어 있다. 
-AWS가 전 세계 사용자에게 데이터를 빠르고 효율적으로 제공하기 위해 구축되어 데이터 처리 및 전달 지점 역할을 담당하고 있다.
-
->CDN(Content Delivery Network)
-CDN은 콘텐츠를 사용자에게 더 빠르고 안정적으로 전달하기 위해 설계된 분산 네트워크 시스템을 말한다. 
-주로 웹 페이지, 동영상 스트리밍, 이미지와 같은 정적 콘텐츠를 전 세계 여러 위치에 미리 캐싱해두고, 사용자에게 가까운 서버에서 데이터를 제공함으로써 지연 시간을 줄이고 성능을 향상시키기는 역할을 한다.
-
-AWS의 CloudFront는 이러한 CDN 서비스의 대표적인 예로, 에지 로케이션을 활용해 사용자와 가까운 위치에서 스트리밍 콘텐츠나 정적 파일을 제공함으로써 지연 시간을 줄이고 안정성을 높인다.
-
-예를 들어, 서울에서 스트리밍 서비스를 운영하며 전 세계에 콘텐츠를 제공한다고 가정해자. 
-모든 요청을 서울의 서버에서 처리한다면, 거리가 먼 지역에서는 속도가 느려지고 연결이 불안정해질 수 있다. 
-하지만 AWS 에지 로케이션을 사용하면, 각 지역의 에지 로케이션에 콘텐츠를 미리 캐싱하여 사용자가 가까운 지점에서 데이터를 받을 수 있다. 
-이를 통해 콘텐츠 전달 속도는 빨라지고 서버 부하도 줄어들게 됩니다.
-
-에지 로케이션은 단순히 캐싱 기능만 제공하는 것이 아니다. 
-CloudFront의 보안 기능과 연결되어, 데이터 전송 암호화 및 애플리케이션 계층의 보호 기능을 제공한다. 
-이렇게 물리적으로 존재하는 에지 로케이션은 글로벌 AWS 네트워크의 핵심적인 구성 요소로, 사용자 경험을 극대화한다.
-
-<img src="https://github.com/user-attachments/assets/2b53534f-c11a-4834-bbdb-6db7d23cb745" width="80%" height="80%"/>
 
 <div style="padding-top:60px;"></div>
 <span style="margin-left:35%;">⊙</span>
