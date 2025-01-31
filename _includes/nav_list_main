@@ -12,7 +12,7 @@
       </li>
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) JAVA, SPRING -->
-        <span class="nav__sub-title">JAVA</span>
+        <span class="nav__sub-title">Java</span>
         <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
         <ul>
             <!--java 카테고리 글들을 모아둔 페이지인 /categories/java 주소의 글로 링크 연결-->
@@ -31,7 +31,7 @@
             {% endfor %}
         </ul>
         
-        <span class="nav__sub-title">SPRING</span>
+        <span class="nav__sub-title">Spring</span>
         <ul>
             {% for category in site.categories %}
                 {% if category[0] == "SpringFramework" %}
@@ -54,7 +54,7 @@
             {% endfor %}
         </ul>
 
-        <span class="nav__sub-title">Git</span>
+        <span class="nav__sub-title">DevOps</span>
         <ul>
             {% for category in site.categories %}
                 {% if category[0] == "Git" %}
@@ -71,31 +71,36 @@
         </ul>
         <ul>
             {% for category in site.categories %}
-                {% if category[0] == "Github-Blog" %}
-                    <li><a href="/categories/github-blog" class="">Github Blog ({{category[1].size}})</a></li>
-                {% endif %}
-            {% endfor %}
-        </ul>
-
-        <span class="nav__sub-title">AWS</span>
-        <ul>
-            {% for category in site.categories %}
                 {% if category[0] == "Aws" %}
                     <li><a href="/categories/aws" class="">Aws ({{category[1].size}})</a></li>
                 {% endif %}
             {% endfor %}
         </ul>
 
-        <span class="nav__sub-title">알고리즘</span>
+        <span class="nav__sub-title">Computer Science</span>
         <ul>
             {% for category in site.categories %}
-                {% if category[0] == "Algorithms" %}
-                    <li><a href="/categories/intellij" class="">알고리즘 ({{category[1].size}})</a></li>
+                {% if category[0] == "Structure" %}
+                    <li><a href="/categories/data-structure" class="">Data Structure ({{category[1].size}})</a></li>
                 {% endif %}
             {% endfor %}
         </ul>
+        <ul>
+            {% for category in site.categories %}
+                {% if category[0] == "Algorithms" %}
+                    <li><a href="/categories/algorithms" class="">Algorithms ({{category[1].size}})</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <ul>
+            {% for category in site.categories %}
+                {% if category[0] == "Architecture" %}
+                    <li><a href="/categories/system-architecture" class="">System Architecture ({{category[1].size}})</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>        
 
-        <span class="nav__sub-title">WEB</span>
+        <span class="nav__sub-title">Web</span>
         <ul>
             {% for category in site.categories %}
                 {% if category[0] == "Web" %}
@@ -165,6 +170,16 @@
                 {% endif %}
             {% endfor %}
         </ul>
+
+        <span class="nav__sub-title">Blog</span>
+        <ul>
+            {% for category in site.categories %}
+                {% if category[0] == "Github-Blog" %}
+                    <li><a href="/categories/github-blog" class="">Github Blog ({{category[1].size}})</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
       </li>
   </ul>
 </nav>
