@@ -59,7 +59,7 @@ p {
   .page {
       float: right;
       /*width: calc(100% - 200px); */
-      padding-right: 200px;
+      padding-right: 290px;
   }
 }
 #main {
