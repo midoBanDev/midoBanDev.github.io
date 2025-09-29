@@ -1,49 +1,76 @@
-  /* 목록 전체의 기본 들여쓰기 줄이기 */
-  ul {
-    /*list-style-position: inside;  점(marker)을 텍스트 안쪽으로 이동 */
-    padding-left: 30px; /* 기본 왼쪽 패딩 제거 */
-    margin-top: -5px;
-  }
+/* 목록 전체의 기본 들여쓰기 줄이기 */
+ul {
+  /*list-style-position: inside;  점(marker)을 텍스트 안쪽으로 이동 */
+  padding-left: 30px; /* 기본 왼쪽 패딩 제거 */
+  margin-top: -5px;
+}
 
-  details {
-    margin: 10px 0;
-  }
+details {
+  margin: 10px 0;
+}
 
-  details > summary {
-      cursor: pointer;
-      padding: 8px;
-  }
+details > summary {
+    cursor: pointer;
+    padding: 8px;
+}
 
-  details > div {
-      border: 2px solid #ddd;
-      border-radius: 4px;
-      padding: 16px;
-      margin-top: 10px;
-      background-color: #f8f9fa;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
+details > div {
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    padding: 16px;
+    margin-top: 10px;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
-  /* 기본 행간 설정 */
-  p {
-      line-height: 1.5;  /* 기본 행간 */
-  }
+/* 기본 행간 설정 */
+p {
+    line-height: 1.5;  /* 기본 행간 */
+}
 
-  .br10 {
-    padding-top:10px;
-  }
+.br10 {
+  padding-top:10px;
+}
 
-  .br15 {
-    padding-top:15px;
-  }
+.br15 {
+  padding-top:15px;
+}
 
-  .br20 {
-    padding-top:20px;
-  }
+.br20 {
+  padding-top:20px;
+}
 
-  .br25 {
-    padding-top:25px;
-  }
+.br25 {
+  padding-top:25px;
+}
 
-  .br30 {
-    padding-top:30px;
+.br30 {
+  padding-top:30px;
+}
+
+@media (min-width: 80em) {
+  .page {
+      width: calc(100% - 300px);
+      padding-right: 30px;
   }
+}
+
+@media (min-width: 64em) {
+  .page {
+      float: right;
+      /*width: calc(100% - 200px); */
+      padding-right: 200px;
+  }
+}
+#main {
+  clear: both;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+  padding-left: 1em;
+  /* padding-right: 1em; */
+  /* -webkit-animation: intro .3s both; */
+  animation: intro .3s both;
+  max-width: 100%;
+  /* -webkit-animation-delay: .15s; */
+  animation-delay: .15s;
+}
